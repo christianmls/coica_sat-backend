@@ -1,0 +1,8 @@
+services:
+  CoicaSat.UsersLogin.domain.UserLoginService:
+    class: ../../../../../Contexts/CoicaSat/UsersLogin/infrastructure/services/JwtUserLoginService
+    arguments: ['@CoicaSat.Users.domain.UserRepository',  '@CoicaSat.Users.domain.EncryptionService']
+
+  CoicaSat.UsersLogin.application.UserAuthenticator:
+    class: ../../../../../Contexts/CoicaSat/UsersLogin/application/UserAuthenticator
+    arguments: ['@CoicaSat.UsersLogin.domain.UserLoginService']

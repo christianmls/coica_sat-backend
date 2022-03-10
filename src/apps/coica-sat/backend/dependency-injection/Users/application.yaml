@@ -1,0 +1,11 @@
+services:
+  CoicaSat.Users.domain.UserRepository:
+    class: ../../../../../Contexts/CoicaSat/Users/infrastructure/persistence/MongoUserRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.Users.domain.EncryptionService:
+    class: ../../../../../Contexts/CoicaSat/Users/infrastructure/security/Bcrypt/BcryptEncryptionService
+
+  CoicaSat.Users.application.UserCreator:
+    class: ../../../../../Contexts/CoicaSat/Users/application/UserCreator
+    arguments: ['@CoicaSat.Users.domain.UserRepository', '@CoicaSat.Users.domain.EncryptionService']

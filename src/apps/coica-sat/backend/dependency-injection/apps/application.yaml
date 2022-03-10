@@ -1,0 +1,16 @@
+services:
+  Apps.CoicaSat.controllers.StatusGetController:
+    class: ../../controllers/StatusGetController
+    arguments: []
+
+  Apps.CoicaSat.controllers.UserProfilePutController:
+    class: ../../controllers/UsersProfile/UserProfilePutController
+    arguments: [ "@CoicaSat.UsersProfile.application.UserProfileCreator" ]
+
+  Apps.CoicaSat.controllers.UserPostController:
+    class: ../../controllers/Users/UserPostController
+    arguments: [ "@CoicaSat.Users.application.UserCreator" ]
+
+  Apps.CoicaSat.controllers.LoginPostController:
+    class: ../../controllers/UsersLogin/LoginPostController
+    arguments: [ "@CoicaSat.UsersLogin.application.UserAuthenticator" ]

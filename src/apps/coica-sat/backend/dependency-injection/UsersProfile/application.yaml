@@ -1,0 +1,8 @@
+services:
+  CoicaSat.UsersProfile.domain.UserProfileRepository:
+    class: ../../../../../Contexts/CoicaSat/UsersProfile/infrastructure/persistence/MongoUserProfileRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.UsersProfile.application.UserProfileCreator:
+    class: ../../../../../Contexts/CoicaSat/UsersProfile/application/UserProfileCreator
+    arguments: ['@CoicaSat.UsersProfile.domain.UserProfileRepository']

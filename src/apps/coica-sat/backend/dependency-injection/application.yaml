@@ -1,0 +1,6 @@
+imports:
+  - { resource: ./Shared/application.yaml }
+  - { resource: ./apps/application.yaml }
+  - { resource: ./UsersProfile/application.yaml }
+  - { resource: ./Users/application.yaml }
+  - { resource: ./UsersLogin/application.yaml }

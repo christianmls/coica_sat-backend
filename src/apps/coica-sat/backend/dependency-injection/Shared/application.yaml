@@ -1,0 +1,11 @@
+services:
+  Shared.CoicaSat.MongoConfig:
+    factory:
+      class: ../../../../../Contexts/CoicaSat/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  Shared.CoicaSat.ConnectionManager:
+    factory:
+      class: ../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      method: 'createClient'
+    arguments: [ 'coica-sat', '@Shared.CoicaSat.MongoConfig' ]

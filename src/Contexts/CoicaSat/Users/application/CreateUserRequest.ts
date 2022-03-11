@@ -5,5 +5,6 @@ export type CreateUserRequest = {
   role: string;
   names: string;
   lastNames: string;
+  phone: string;
   birthDate: Date;
 };

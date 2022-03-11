@@ -10,18 +10,6 @@ export class UserMapper implements  IUserMapper {
   }
 
   public transformToDTO(role: User): UserDTO {
-    return new UserDTO(role.id.value, role.email, role.password, role.names, role.lastNames, role.birthDate, role.role);
-  }
-
-  public transformToDomain(userDTO: UserDTO): User {
-    return User.fromPrimitives({
-      id: userDTO.id,
-      email: userDTO.email,
-      password: userDTO.password,
-      names: userDTO.names,
-      lastNames: userDTO.lastNames,
-      birthDate: userDTO.birthDate,
-      role: userDTO.role
-    });
+    return new UserDTO(role.id.value, role.email, role.names, role.lastNames, role.phone,  role.birthDate, role.role);
   }
 }

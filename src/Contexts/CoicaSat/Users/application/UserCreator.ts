@@ -20,6 +20,7 @@ export class UserCreator {
       role: request.role,
       names: request.names,
       lastNames: request.lastNames,
+      phone: request.phone,
       birthDate: request.birthDate
     });
     return this.repository.save(user);

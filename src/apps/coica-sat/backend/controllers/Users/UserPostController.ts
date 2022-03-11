@@ -10,6 +10,7 @@ type UserPostRequest = Request & {
     password: string;
     names: string;
     lastNames: string;
+    phone: string;
     birthDate: Date;
   };
 };
@@ -18,8 +19,8 @@ export class UserPostController implements Controller {
 
   async run(req: UserPostRequest, res: Response) {
     try {
-      const { id, email, password, role, names, lastNames, birthDate } = req.body;
-      await this.userCreator.run({ id, email, password, role, names, lastNames, birthDate });
+      const { id, email, password, role, names, lastNames, phone, birthDate } = req.body;
+      await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate });
       res.status(httpStatus.CREATED).send();
     } catch (error) {
       console.error(error);

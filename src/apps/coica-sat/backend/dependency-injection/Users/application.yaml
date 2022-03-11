@@ -9,3 +9,11 @@ services:
   CoicaSat.Users.application.UserCreator:
     class: ../../../../../Contexts/CoicaSat/Users/application/UserCreator
     arguments: ['@CoicaSat.Users.domain.UserRepository', '@CoicaSat.Users.domain.EncryptionService']
+
+  CoicaSat.Users.domain.UserMapper:
+    class: ../../../../../Contexts/CoicaSat/Users/infrastructure/mappers/UserMapper
+
+  CoicaSat.Users.application.UserFinder:
+    class: ../../../../../Contexts/CoicaSat/Users/application/UserFinder
+    arguments: ['@CoicaSat.Users.domain.UserRepository', '@CoicaSat.Users.domain.UserMapper']
+

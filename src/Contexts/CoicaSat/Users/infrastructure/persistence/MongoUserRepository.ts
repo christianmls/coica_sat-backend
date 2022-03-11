@@ -6,9 +6,11 @@ import {Nullable} from '../../../../Shared/domain/Nullable';
 
 export interface UserDocument {
   _id: string;
-  name: string;
   email: string;
   password: string;
+  names: string;
+  lastNames: string;
+  birthDate: Date;
   role: string;
 }
 
@@ -21,6 +23,9 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       id: document._id,
       email: document.email,
       password: document.password,
+      names: document.names,
+      lastNames: document.lastNames,
+      birthDate: document.birthDate,
       role: document.role
     }) : null;
   }
@@ -31,7 +36,10 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       id: user._id,
       email: user.email,
       password: user.password,
-      role: user.role
+      role: user.role,
+      names: user.names,
+      lastNames: user.lastNames,
+      birthDate: user.birthDate
     })) ?? [];
   }
 
@@ -46,7 +54,10 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       id: document._id,
       email: document.email,
       password: document.password,
-      role: document.role
+      role: document.role,
+      names: document.names,
+      lastNames: document.lastNames,
+      birthDate: document.birthDate
     }) : null;
   }
 

@@ -7,9 +7,12 @@ export class User extends AggregateRoot {
   public readonly  id: UserId;
   public readonly email: string;
   public readonly password: string;
+  public readonly names: string;
+  public readonly lastNames: string
+  public readonly  birthDate: Date;
   public readonly role: string;
 
-  constructor({id, email, password, role }: {id: UserId, email: string, password: string, role: string}) {
+  constructor({id, email, password, role, names, lastNames, birthDate }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, birthDate: Date}) {
     super();
 
     this.ensurePasswordLength(password);
@@ -18,6 +21,9 @@ export class User extends AggregateRoot {
     this.email = email;
     this.password = password;
     this.role = 'user';
+    this.names = names;
+    this.lastNames = lastNames;
+    this.birthDate = birthDate;
   }
 
   private ensurePasswordLength(password: string): void {
@@ -26,12 +32,15 @@ export class User extends AggregateRoot {
     }
   }
 
-  public static fromPrimitives(planData: {id: string, email: string, password: string, role: string}): User {
+  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, birthDate: Date, role: string}): User {
     return new User({
       id: new UserId(planData.id),
       email: planData.email,
       password: planData.password,
-      role: planData.role
+      role: planData.role,
+      names: planData.names,
+      lastNames: planData.lastNames,
+      birthDate: planData.birthDate
     });
   }
 
@@ -40,6 +49,9 @@ export class User extends AggregateRoot {
       id: this.id.value,
       email: this.email,
       password: this.password,
+      names: this.names,
+      lastNames: this.lastNames,
+      birthDate: this.birthDate,
       role: this.role
     };
   }

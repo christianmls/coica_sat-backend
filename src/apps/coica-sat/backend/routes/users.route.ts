@@ -9,7 +9,7 @@ const validator = joiValidator.createValidator({});
 
 export const register = (router: Router) => {
   const userPostController: UserPostController = container.get('Apps.CoicaSat.controllers.UserPostController');
-  router.post('/user',  validator.query(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
+  router.post('/user',  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
 
   const userGetController: UserGetController = container.get('Apps.CoicaSat.controllers.UserGetController');
   router.get('/users',   (req: Request, res: Response) => userGetController.run(req, res));

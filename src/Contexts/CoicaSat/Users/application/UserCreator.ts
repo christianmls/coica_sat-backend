@@ -23,6 +23,10 @@ export class UserCreator {
       phone: request.phone,
       birthDate: request.birthDate
     });
+    const userExists = await this.repository.findByEmail(user.email);
+    if (userExists) {
+      throw new Error('User already exists');
+    }
     return this.repository.save(user);
   }
 }

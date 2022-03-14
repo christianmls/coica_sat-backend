@@ -28,7 +28,7 @@ export class JwtUserLoginService implements UserLoginService {
     }
 
     const token = jwt.sign({
-      id: user.id
+      id: user.id.value
     }, JWT_SECRET, { expiresIn: '48h' });
 
     return new UserLogged(token);

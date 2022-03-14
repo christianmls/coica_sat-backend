@@ -9,6 +9,10 @@ import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 import dotenv from 'dotenv';
 
+import swaggerUi from 'swagger-ui-express';
+import  swaggerJsDoc from 'swagger-jsdoc';
+import { SwaggerJsDocsOptions } from './swaggerJsDocsOptions';
+
 export class Server {
   private express: express.Express;
   private port: string;
@@ -28,6 +32,12 @@ export class Server {
     const router = Router();
     router.use(errorHandler());
     this.express.use(router);
+
+    SwaggerJsDocsOptions.definition.servers = [{
+      url: `http://localhost:${this.port}`
+    }];
+    const swaggerSpec = swaggerJsDoc(SwaggerJsDocsOptions);
+    router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     registerRoutes(router);
 

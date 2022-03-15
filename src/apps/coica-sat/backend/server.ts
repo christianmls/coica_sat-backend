@@ -8,7 +8,7 @@ import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 import dotenv from 'dotenv';
-
+import Cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import  swaggerJsDoc from 'swagger-jsdoc';
 import {getSwaggerJsDocsOptions} from './swaggerJsDocsOptions';
@@ -31,6 +31,7 @@ export class Server {
     this.express.use(compress());
     const router = Router();
     router.use(errorHandler());
+    this.express.use(Cors());
     this.express.use(router);
 
     const swaggerJsDocsOptions = getSwaggerJsDocsOptions(this.port);

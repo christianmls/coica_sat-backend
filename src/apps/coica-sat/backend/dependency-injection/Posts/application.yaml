@@ -6,3 +6,10 @@ services:
   CoicaSat.Posts.application.PostCreator:
     class: ../../../../../Contexts/CoicaSat/Posts/application/PostCreator
     arguments: ['@CoicaSat.Posts.domain.PostRepository']
+
+  CoicaSat.Posts.domain.PostMapper:
+    class: ../../../../../Contexts/CoicaSat/Posts/infrastructure/mappers/PostMapper
+
+  CoicaSat.Posts.application.PostFinder:
+    class: ../../../../../Contexts/CoicaSat/Users/application/UserFinder
+    arguments: [ '@CoicaSat.Posts.domain.PostRepository', '@CoicaSat.Posts.domain.PostMapper' ]

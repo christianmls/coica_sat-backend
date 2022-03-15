@@ -4,6 +4,7 @@ import joiValidator from 'express-joi-validation';
 import {PostPostController} from '../controllers/Posts/PostPostController';
 import {PostSchema} from '../schemas/PostSchema';
 import {AuthorizeService} from '../services/AuthorizeService';
+import {PostGetController} from '../controllers/Posts/PostGetController';
 
 const validator = joiValidator.createValidator({});
 
@@ -40,8 +41,6 @@ const validator = joiValidator.createValidator({});
  */
 
 export const register = (router: Router) => {
-  const postPostController: PostPostController = container.get('Apps.CoicaSat.controllers.PostPostController');
-
   /**
    * @swagger
    * /post:
@@ -64,6 +63,26 @@ export const register = (router: Router) => {
    *       500:
    *         description: Some server error
    */
+  const postPostController: PostPostController = container.get('Apps.CoicaSat.controllers.PostPostController');
   // @ts-ignore
   router.post('/post',  AuthorizeService.verify, validator.body(PostSchema),  (req: Request, res: Response) => postPostController.run(req, res));
+
+  /**
+   * @swagger
+   * /posts:
+   *   get:
+   *     summary: Returns the list of all the posts
+   *     tags: [Posts]
+   *     responses:
+   *       200:
+   *         description: The list of the posts
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Post'
+   */
+  const postGetController: PostGetController = container.get('Apps.CoicaSat.controllers.PostGetController');
+  router.get('/posts',   (req: Request, res: Response) => postGetController.run(req, res));
 };

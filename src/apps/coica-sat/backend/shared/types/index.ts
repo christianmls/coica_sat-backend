@@ -1,6 +1,6 @@
 import {Request} from 'express';
 
-export type TokenVerifyGetRequest = Request & {
+export type UserLoggedRequest = Request & {
   user: {
     id: string;
   };

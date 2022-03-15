@@ -1,0 +1,8 @@
+services:
+  CoicaSat.Posts.domain.PostRepository:
+    class: ../../../../../Contexts/CoicaSat/Posts/infrastructure/persistence/MongoPostRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.Posts.application.PostCreator:
+    class: ../../../../../Contexts/CoicaSat/Posts/application/PostCreator
+    arguments: ['@CoicaSat.Posts.domain.PostRepository']

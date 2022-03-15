@@ -4,3 +4,4 @@ imports:
   - { resource: ./UsersProfile/application.yaml }
   - { resource: ./Users/application.yaml }
   - { resource: ./UsersLogin/application.yaml }
+  - { resource: ./Posts/application.yaml }

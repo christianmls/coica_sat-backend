@@ -1,6 +1,6 @@
 const routesPaths = __dirname + '/**/*.route.*';
 
-export const SwaggerJsDocsOptions = {
+export const getSwaggerJsDocsOptions = (port: string) => ({
   definition: {
     openapi: '3.0.0',
     info: {
@@ -10,9 +10,9 @@ export const SwaggerJsDocsOptions = {
     },
     servers: [
       {
-        url: ''
+        url:  `http://localhost:${port}`
       }
     ]
   },
   apis: [routesPaths]
-};
+});

@@ -21,3 +21,7 @@ services:
 
   Apps.CoicaSat.controllers.TokenVerificationGetController:
     class: ../../controllers/TokensVerification/TokenVerificationGetController
+
+  Apps.CoicaSat.controllers.PostPostController:
+    class: ../../controllers/Posts/PostPostController
+    arguments: [ "@CoicaSat.Posts.application.PostCreator" ]

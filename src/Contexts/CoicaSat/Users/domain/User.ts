@@ -11,7 +11,7 @@ export class User extends AggregateRoot {
   public readonly lastNames: string;
   public readonly phone: string;
   public readonly  birthDate: Date;
-  public readonly role: string;
+  public readonly role: Array<string>;
 
   constructor({id, email, password, role, names, lastNames, phone, birthDate }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, phone: string, birthDate: Date}) {
     super();
@@ -21,7 +21,7 @@ export class User extends AggregateRoot {
     this.id = id;
     this.email = email;
     this.password = password;
-    this.role = 'user';
+    this.role = ['user'];
     this.names = names;
     this.lastNames = lastNames;
     this.phone = phone;

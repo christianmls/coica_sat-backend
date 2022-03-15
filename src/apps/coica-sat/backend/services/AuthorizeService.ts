@@ -1,11 +1,11 @@
 import Jwt from 'jsonwebtoken';
 import { Response, NextFunction } from 'express';
-import {TokenVerifyGetRequest} from '../shared/types';
+import {UserLoggedRequest} from '../shared/types';
 
 const JWT_SECRET = process.env.JWT_SECRET ?? 'jwt_secret_key_123_dev';
 
 export class AuthorizeService {
-  public static async verify(req: TokenVerifyGetRequest, res: Response, next: NextFunction) {
+  public static async verify(req: UserLoggedRequest, res: Response, next: NextFunction) {
     try {
       const { authorization: token } = req.headers;
       if (!token) {

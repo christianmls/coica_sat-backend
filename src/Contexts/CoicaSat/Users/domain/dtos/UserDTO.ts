@@ -5,9 +5,9 @@ export class UserDTO {
   public lastNames: string;
   public phone: string;
   public birthDate: Date;
-  public role: string;
+  public role: Array<string>;
 
-  constructor(id: string, email: string, names: string, lastNames: string, phone: string,  birthDate: Date, role: string) {
+  constructor(id: string, email: string, names: string, lastNames: string, phone: string,  birthDate: Date, role: Array<string>) {
     this.id = id;
     this.email = email;
     this.names = names;

@@ -11,7 +11,7 @@ import dotenv from 'dotenv';
 
 import swaggerUi from 'swagger-ui-express';
 import  swaggerJsDoc from 'swagger-jsdoc';
-import { SwaggerJsDocsOptions } from './swaggerJsDocsOptions';
+import {getSwaggerJsDocsOptions} from './swaggerJsDocsOptions';
 
 export class Server {
   private express: express.Express;
@@ -33,10 +33,8 @@ export class Server {
     router.use(errorHandler());
     this.express.use(router);
 
-    SwaggerJsDocsOptions.definition.servers = [{
-      url: `http://localhost:${this.port}`
-    }];
-    const swaggerSpec = swaggerJsDoc(SwaggerJsDocsOptions);
+    const swaggerJsDocsOptions = getSwaggerJsDocsOptions(this.port);
+    const swaggerSpec = swaggerJsDoc(swaggerJsDocsOptions);
     router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     registerRoutes(router);

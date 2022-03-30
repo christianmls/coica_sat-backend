@@ -29,3 +29,19 @@ services:
   Apps.CoicaSat.controllers.PostGetController:
     class: ../../controllers/Posts/PostGetController
     arguments: [ "@CoicaSat.Posts.application.PostFinder" ]
+
+  Apps.CoicaSat.controllers.HRDefenderSheetPutController:
+    class: ../../controllers/HRDefendersSheets/HRDefenderSheetPutController
+    arguments: [ "@CoicaSat.HRDefendersSheets.application.HRDefenderSheetCreator" ]
+
+  Apps.CoicaSat.controllers.HRDefenderSheetPostController:
+    class: ../../controllers/HRDefendersSheets/HRDefenderSheetPostController
+    arguments: [ "@CoicaSat.HRDefendersSheets.application.HRDefenderSheetCreator" ]
+
+  Apps.CoicaSat.controllers.HRDefenderSheetDeleteController:
+    class: ../../controllers/HRDefendersSheets/HRDefenderSheetDeleteController
+    arguments: [ "@CoicaSat.HRDefendersSheets.application.HRDefenderSheetRemover" ]
+
+  Apps.CoicaSat.controllers.HRDefenderSheetGetController:
+    class: ../../controllers/HRDefendersSheets/HRDefenderSheetGetController
+    arguments: [ "@CoicaSat.HRDefendersSheets.application.HRDefenderSheetFinder" ]

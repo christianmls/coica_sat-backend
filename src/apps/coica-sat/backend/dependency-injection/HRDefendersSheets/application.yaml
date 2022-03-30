@@ -1,0 +1,16 @@
+services:
+  CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/infrastructure/persistence/MongoHRDefenderSheetRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.HRDefendersSheets.application.HRDefenderSheetCreator:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetCreator
+    arguments: ['@CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository']
+
+  CoicaSat.HRDefendersSheets.application.HRDefenderSheetRemover:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetRemover
+    arguments: [ '@CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository' ]
+
+  CoicaSat.HRDefendersSheets.application.HRDefenderSheetFinder:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetFinder
+    arguments: [ '@CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository' ]

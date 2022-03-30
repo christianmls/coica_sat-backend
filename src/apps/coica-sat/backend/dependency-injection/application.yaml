@@ -5,3 +5,4 @@ imports:
   - { resource: ./Users/application.yaml }
   - { resource: ./UsersLogin/application.yaml }
   - { resource: ./Posts/application.yaml }
+  - { resource: ./HRDefendersSheets/application.yaml }

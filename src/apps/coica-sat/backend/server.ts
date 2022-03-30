@@ -1,4 +1,5 @@
 import { json, urlencoded } from 'body-parser';
+import fileUpload from 'express-fileupload';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
 import express, { Request, Response } from 'express';
@@ -12,10 +13,11 @@ import Cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import  swaggerJsDoc from 'swagger-jsdoc';
 import {getSwaggerJsDocsOptions} from './swaggerJsDocsOptions';
+import path from 'path';
 
 export class Server {
   private express: express.Express;
-  private port: string;
+  private readonly port: string;
   private httpServer?: http.Server;
 
   constructor(port: string) {
@@ -32,12 +34,14 @@ export class Server {
     const router = Router();
     router.use(errorHandler());
     this.express.use(Cors());
+    this.express.use(fileUpload());
     this.express.use(router);
 
     const swaggerJsDocsOptions = getSwaggerJsDocsOptions(this.port);
     const swaggerSpec = swaggerJsDoc(swaggerJsDocsOptions);
     router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+    this.express.use('/file',  express.static(path.join(__dirname, 'public', 'uploads')));
     registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response, next: Function) => {

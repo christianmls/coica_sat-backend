@@ -127,7 +127,7 @@ export const register = (router: Router) => {
 
   /**
    * @swagger
-   * /appointment/{id}:
+   * /hr-defender-sheet/{id}:
    *   delete:
    *     summary: Remove the appointment by id
    *     tags: [HrDefenderSheet]

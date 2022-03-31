@@ -38,6 +38,8 @@ interface HRDefenderSheetDocument {
   reportingCommunityBase: string;
   organizationName: string;
   organizationPersonName: string;
+  status: string;
+  processing: boolean;
 }
 
 export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSheet> implements HRDefenderSheetRepository {
@@ -85,6 +87,8 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
         reportingCommunityBase: hrDefenderSheet.reportingCommunityBase,
         organizationName: hrDefenderSheet.organizationName,
         organizationPersonName: hrDefenderSheet.organizationPersonName,
+        status: hrDefenderSheet.status,
+        processing: hrDefenderSheet.processing
       });
     }) ?? [];
   }

@@ -34,5 +34,7 @@ export const HrDefenderSheetSchema = Joi.object().keys({
   requestShortDescription: Joi.string().required(),
   reportingCommunityBase: Joi.string().required(),
   organizationName: Joi.string().required(),
-  organizationPersonName: Joi.string().required()
+  organizationPersonName: Joi.string().required(),
+  status: Joi.string().required(),
+  processing: Joi.boolean().required()
 });

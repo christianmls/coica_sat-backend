@@ -45,6 +45,8 @@ export class HRDefenderSheetCreator {
       threatAuthor: request.threatAuthor,
       toWhomWasRequested: request.toWhomWasRequested,
       UTMCoordinates: request.UTMCoordinates,
+      status: request.status,
+      processing: request.processing
     });
     return this.repository.save(hrDefenderSheet);
   }

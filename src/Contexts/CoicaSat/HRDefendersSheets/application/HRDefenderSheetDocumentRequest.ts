@@ -33,4 +33,6 @@ export type HRDefenderSheetDocumentRequest = {
   reportingCommunityBase: string;
   organizationName: string;
   organizationPersonName: string;
+  status: string;
+  processing: boolean;
 };

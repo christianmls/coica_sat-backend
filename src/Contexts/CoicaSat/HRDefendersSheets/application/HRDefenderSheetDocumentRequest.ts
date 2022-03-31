@@ -4,15 +4,15 @@ export type HRDefenderSheetDocumentRequest = {
   threatType: string;
   location: string;
   originTown: string;
-  threatOtherType: string;
-  rightsViolatedType: string;
+  threatOtherType: Array<string>;
+  rightsViolatedType: Array<string>;
   rightsViolatedOtherType: string;
   responseType: string;
-  relationShipCOVIDType: string;
+  relationShipCOVIDType: Array<string>;
   relationShipCOVIDOtherType: string;
   threatAuthor: string;
   factsReported: string;
-  informationSource: string;
+  informationSource: Array<string>;
   informationSourceOther: string;
   indicateMeans: string;
   thereWasLegalAction: string;
@@ -24,7 +24,7 @@ export type HRDefenderSheetDocumentRequest = {
   completedBy: string;
   personName: string;
   requestCountry: string;
-  requestType: string;
+  requestType: Array<string>;
   requestAuthor: string;
   requestNumber: string;
   toWhomWasRequested: string;

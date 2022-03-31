@@ -7,15 +7,15 @@ export class HRDefenderSheet extends AggregateRoot {
   public readonly threatType: string;
   public readonly location: string;
   public readonly originTown: string;
-  public readonly threatOtherType: string;
-  public readonly rightsViolatedType: string;
+  public readonly threatOtherType: Array<string>;
+  public readonly rightsViolatedType: Array<string>;
   public readonly rightsViolatedOtherType: string;
   public readonly responseType: string;
-  public readonly relationShipCOVIDType: string;
+  public readonly relationShipCOVIDType: Array<string>;
   public readonly relationShipCOVIDOtherType: string;
   public readonly threatAuthor: string;
   public readonly factsReported: string;
-  public readonly informationSource: string;
+  public readonly informationSource: Array<string>;
   public readonly informationSourceOther: string;
   public readonly indicateMeans: string;
   public readonly thereWasLegalAction: string;
@@ -27,7 +27,7 @@ export class HRDefenderSheet extends AggregateRoot {
   public readonly completedBy: string;
   public readonly personName: string;
   public readonly requestCountry: string;
-  public readonly requestType: string;
+  public readonly requestType: Array<string>;
   public readonly requestAuthor: string;
   public readonly requestNumber: string;
   public readonly toWhomWasRequested: string;
@@ -37,7 +37,7 @@ export class HRDefenderSheet extends AggregateRoot {
   public readonly organizationName: string;
   public readonly organizationPersonName: string;
 
-  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: string, rightsViolatedType: string, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: string, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: string, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: string, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string) {
+  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: Array<string>, rightsViolatedType: Array<string>, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: Array<string>, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: Array<string>, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: Array<string>, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string) {
     super();
     this.id = id;
     this.country = country;
@@ -115,15 +115,15 @@ export class HRDefenderSheet extends AggregateRoot {
     threatType: string,
     location: string,
     originTown: string,
-    threatOtherType: string,
-    rightsViolatedType: string,
+    threatOtherType: Array<string>,
+    rightsViolatedType: Array<string>,
     rightsViolatedOtherType: string,
     responseType: string,
-    relationShipCOVIDType: string,
+    relationShipCOVIDType: Array<string>,
     relationShipCOVIDOtherType: string,
     threatAuthor: string,
     factsReported: string,
-    informationSource: string,
+    informationSource: Array<string>,
     informationSourceOther: string,
     indicateMeans: string,
     thereWasLegalAction: string,
@@ -135,7 +135,7 @@ export class HRDefenderSheet extends AggregateRoot {
     completedBy: string,
     personName: string,
     requestCountry: string,
-    requestType: string,
+    requestType: Array<string>,
     requestAuthor: string,
     requestNumber: string,
     toWhomWasRequested: string,
@@ -201,12 +201,12 @@ export class HRDefenderSheet extends AggregateRoot {
       informationSourceOther: this.informationSourceOther,
       indicateMeans: this.indicateMeans,
       thereWasLegalAction: this.thereWasLegalAction,
-      thereWasAndAswered: this.thereWasAndAnswered,
+      thereWasAndAnswered: this.thereWasAndAnswered,
       defenderName: this.defenderName,
       UTMCoordinates: this.UTMCoordinates,
       contactDetails: this.contactDetails,
       communityBase: this.communityBase,
-      compleatedBy: this.completedBy,
+      completedBy: this.completedBy,
       personName: this.personName,
       requestCountry: this.requestCountry,
       requestType: this.requestType,

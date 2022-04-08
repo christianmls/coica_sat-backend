@@ -41,6 +41,8 @@ export class Server {
     const swaggerSpec = swaggerJsDoc(swaggerJsDocsOptions);
     router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+    console.log(path.join(__dirname, 'public', 'uploads'), '*****************************');
+
     this.express.use('/file',  express.static(path.join(__dirname, 'public', 'uploads')));
     registerRoutes(router);
 

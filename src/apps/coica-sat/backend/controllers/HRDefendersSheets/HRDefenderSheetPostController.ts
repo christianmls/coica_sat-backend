@@ -11,7 +11,13 @@ export class HRDefenderSheetPostController implements Controller {
 
   async run(req: HRDefenderSheetBodyRequest, res: Response) {
     const { body  } = req;
-    await this.hrDefenderSheetCreator.run({ ...body  });
+    const status = 'Recibida';
+    const processing = false;
+    await this.hrDefenderSheetCreator.run({
+      ...body,
+      status,
+      processing
+    });
     res.status(httpStatus.CREATED).send();
   }
 }

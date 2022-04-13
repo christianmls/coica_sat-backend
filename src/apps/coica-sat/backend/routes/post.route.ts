@@ -5,6 +5,8 @@ import {PostPostController} from '../controllers/Posts/PostPostController';
 import {PostSchema} from '../schemas/PostSchema';
 import {AuthorizeService} from '../services/AuthorizeService';
 import {PostGetController} from '../controllers/Posts/PostGetController';
+import {PostPutController} from '../controllers/Posts/PostPutController';
+import {PostDeleteController} from '../controllers/Posts/PostDeleteController';
 
 const validator = joiValidator.createValidator({});
 
@@ -85,4 +87,63 @@ export const register = (router: Router) => {
    */
   const postGetController: PostGetController = container.get('Apps.CoicaSat.controllers.PostGetController');
   router.get('/posts',   (req: Request, res: Response) => postGetController.run(req, res));
+
+  /**
+   * @swagger
+   * /post/{id}:
+   *  put:
+   *    summary: Update the Post by the id
+   *    tags: [Posts]
+   *    parameters:
+   *      - in: path
+   *        name: id
+   *        schema:
+   *          type: string
+   *        required: true
+   *        description: The post id
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Post'
+   *    responses:
+   *      200:
+   *        description: The post was updated
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/Post'
+   *      404:
+   *        description: The post was not found
+   *      500:
+   *        description: Some error happened
+   */
+  const postPutController: PostPutController = container.get('Apps.CoicaSat.controllers.PostPutController');
+  // @ts-ignore
+  router.put('/post/:id', validator.body(PostSchema),  ( req: Request, res: Response ) => postPutController.run(req, res));
+
+  /**
+   * @swagger
+   * /post/{id}:
+   *   delete:
+   *     summary: Remove the post by id
+   *     tags: [Post]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: The post id
+   *
+   *     responses:
+   *       200:
+   *         description: The post was deleted
+   *       404:
+   *         description: The post was not found
+   */
+  const postDeleteController: PostDeleteController = container.get('Apps.CoicaSat.controllers.PostDeleteController');
+  // @ts-ignore
+  router.delete('/post/:id', (req: Request, res: Response) => postDeleteController.run(req, res));
 };

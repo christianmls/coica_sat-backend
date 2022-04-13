@@ -26,9 +26,17 @@ services:
     class: ../../controllers/Posts/PostPostController
     arguments: [ "@CoicaSat.Posts.application.PostCreator" ]
 
+  Apps.CoicaSat.controllers.PostPutController:
+    class: ../../controllers/Posts/PostPutController
+    arguments: [ "@CoicaSat.Posts.application.PostCreator" ]
+
   Apps.CoicaSat.controllers.PostGetController:
     class: ../../controllers/Posts/PostGetController
     arguments: [ "@CoicaSat.Posts.application.PostFinder" ]
+
+  Apps.CoicaSat.controllers.PostDeleteController:
+    class: ../../controllers/Posts/PostDeleteController
+    arguments: [ "@CoicaSat.Posts.application.PostRemover" ]
 
   Apps.CoicaSat.controllers.HRDefenderSheetPutController:
     class: ../../controllers/HRDefendersSheets/HRDefenderSheetPutController

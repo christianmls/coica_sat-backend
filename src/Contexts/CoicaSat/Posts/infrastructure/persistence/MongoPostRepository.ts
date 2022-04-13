@@ -26,6 +26,10 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
     return this.persist(post.id.value, post);
   }
 
+  public delete(id: PostId): Promise<void> {
+    return this.removeById(id.value);
+  }
+
   public async searchById(id: PostId): Promise<Nullable<Post>> {
     const document = await this.findOne<PostDocument>( { _id: id.value });
 

@@ -7,4 +7,5 @@ export interface UserRepository {
   searchAll(): Promise<Array<User>>;
   searchById(id: UserId): Promise<Nullable<User>>;
   findByEmail(id: string): Promise<Nullable<User>>;
+  delete(id: UserId): Promise<void>;
 }

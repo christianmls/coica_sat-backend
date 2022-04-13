@@ -50,6 +50,9 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
     return this.persist(user.id.value, user);
   }
 
+  public delete(userId: UserId): Promise<void> {
+    return this.removeById(userId.value);
+  }
   public async searchById(id: UserId): Promise<Nullable<User>> {
     const document = await this.findOne<UserDocument>( { _id: id.value });
 

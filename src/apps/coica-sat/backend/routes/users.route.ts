@@ -4,6 +4,7 @@ import {UserPostController} from '../controllers/Users/UserPostController';
 import {UserGetController} from '../controllers/Users/UserGetController';
 import joiValidator from 'express-joi-validation';
 import {UserSchema} from '../schemas/UserSchema';
+import {UserDeleteController} from '../controllers/Users/UserDeleteController';
 
 const validator = joiValidator.createValidator({});
 
@@ -100,4 +101,29 @@ export const register = (router: Router) => {
    */
   const userGetController: UserGetController = container.get('Apps.CoicaSat.controllers.UserGetController');
   router.get('/users',   (req: Request, res: Response) => userGetController.run(req, res));
+
+
+  /**
+   * @swagger
+   * /user/{id}:
+   *   delete:
+   *     summary: Remove the user by id
+   *     tags: [User]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: The user id
+   *
+   *     responses:
+   *       200:
+   *         description: The user was deleted
+   *       404:
+   *         description: The user was not found
+   */
+  const userDeleteController: UserDeleteController = container.get('Apps.CoicaSat.controllers.UserDeleteController');
+  // @ts-ignore
+  router.delete('/user/:id', (req: Request, res: Response) => userDeleteController.run(req, res));
 };

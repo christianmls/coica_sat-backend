@@ -11,6 +11,10 @@ services:
     class: ../../controllers/Users/UserPostController
     arguments: [ "@CoicaSat.Users.application.UserCreator" ]
 
+  Apps.CoicaSat.controllers.UserDeleteController:
+    class: ../../controllers/Users/UserDeleteController
+    arguments: [ "@CoicaSat.Users.application.UserRemover" ]
+
   Apps.CoicaSat.controllers.LoginPostController:
     class: ../../controllers/UsersLogin/LoginPostController
     arguments: [ "@CoicaSat.UsersLogin.application.UserAuthenticator" ]

@@ -22,9 +22,10 @@ export class UserPostController implements Controller {
       const { id, email, password, role, names, lastNames, phone, birthDate } = req.body;
       await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate });
       res.status(httpStatus.CREATED).send();
-    } catch (error) {
-      console.error(error);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
+      });
     }
   }
 }

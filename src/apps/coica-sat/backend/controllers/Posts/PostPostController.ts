@@ -15,13 +15,14 @@ export class PostPostController implements Controller {
   constructor(private postCreator: PostCreator) {}
 
   async run(req: PostPostRequest, res: Response) {
-    try {
-      const { id, description, images } = req.body;
-      await this.postCreator.run({ id, description, images, userCreatorId: req.user.id });
-      res.status(httpStatus.CREATED).send();
-    } catch (error) {
-      console.error(error);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
-    }
+      try {
+        const { id, description, images } = req.body;
+        await this.postCreator.run({ id, description, images, userCreatorId: req.user.id });
+        res.status(httpStatus.CREATED).send();
+      }  catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+          error: String(error)
+        });
+      }
   }
 }

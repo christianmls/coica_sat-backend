@@ -8,12 +8,13 @@ export class PostGetController implements Controller {
   constructor(private postFinder: PostFinder) {}
 
   async run(req: Request, res: Response) {
-    try {
-      const posts = await this.postFinder.run();
-      res.status(httpStatus.OK).send(posts);
-    } catch (error) {
-      console.error(error);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
-    }
+      try {
+        const posts = await this.postFinder.run();
+        res.status(httpStatus.OK).send(posts);
+      }  catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+          error: String(error)
+        });
+      }
   }
 }

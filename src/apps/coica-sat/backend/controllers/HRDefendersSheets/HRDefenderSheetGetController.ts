@@ -10,7 +10,13 @@ export class HRDefenderSheetGetController implements Controller {
   constructor(private postFinder: HRDefenderSheetFinder) {}
 
   async run(req: Request, res: Response) {
-    const hrDefendersSheets = await this.postFinder.run();
-    res.status(httpStatus.OK).send(hrDefendersSheets);
+    try {
+      const hrDefendersSheets = await this.postFinder.run();
+      res.status(httpStatus.OK).send(hrDefendersSheets);
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
+      });
+    }
   }
 }

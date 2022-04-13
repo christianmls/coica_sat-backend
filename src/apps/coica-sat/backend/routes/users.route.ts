@@ -84,7 +84,7 @@ export const register = (router: Router) => {
 
   /**
    * @swagger
-   * /users
+   * /users:
    *   get:
    *     summary: Returns the list of all the users
    *     tags: [Users]

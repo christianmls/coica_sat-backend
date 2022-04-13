@@ -11,9 +11,10 @@ export class UserGetController implements Controller {
     try {
       const users = await this.userFinder.run();
       res.status(httpStatus.OK).send(users);
-    } catch (error) {
-      console.error(error);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
+      });
     }
   }
 }

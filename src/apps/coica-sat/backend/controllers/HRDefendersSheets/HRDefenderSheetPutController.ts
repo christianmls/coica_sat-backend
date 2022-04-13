@@ -49,8 +49,14 @@ export class HRDefenderSheetPutController implements Controller {
   constructor(private hrDefenderSheetCreator: HRDefenderSheetCreator) {}
 
   async run(req: HRDefenderSheetBodyRequest, res: Response) {
-    const { body  } = req;
-    await this.hrDefenderSheetCreator.run({ ...body  });
-    res.status(httpStatus.OK).send();
+    try {
+      const { body  } = req;
+      await this.hrDefenderSheetCreator.run({ ...body  });
+      res.status(httpStatus.OK).send();
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
+      });
+    }
   }
 }

@@ -21,9 +21,9 @@ export class LoginPostController implements Controller {
       res.status(httpStatus.OK).send({
         token: userLoginResponse.token
       });
-    } catch (error) {
-      res.status(httpStatus.UNAUTHORIZED).send({
-        error: 'Unauthorized'
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
       });
     }
   }

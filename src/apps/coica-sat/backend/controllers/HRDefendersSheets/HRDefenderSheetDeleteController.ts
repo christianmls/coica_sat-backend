@@ -7,8 +7,14 @@ export class HRDefenderSheetDeleteController implements Controller {
   constructor(private departmentRemover: HRDefenderSheetRemover) {}
 
   async run(req: Request, res: Response) {
-    const { id } = req.params;
-    await this.departmentRemover.run(id);
-    res.status(httpStatus.NO_CONTENT).send();
+    try {
+      const { id } = req.params;
+      await this.departmentRemover.run(id);
+      res.status(httpStatus.NO_CONTENT).send();
+    }  catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        error: String(error)
+      });
+    }
   }
 }

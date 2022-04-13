@@ -16,6 +16,6 @@ export class UserAuthenticator {
       password: request.password
     });
 
-    return new UserLoginResponse(userLogged.token);
+    return new UserLoginResponse(userLogged.token, userLogged.user);
   }
 }

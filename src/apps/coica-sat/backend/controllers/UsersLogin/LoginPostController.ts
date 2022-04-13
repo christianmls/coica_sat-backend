@@ -19,7 +19,8 @@ export class LoginPostController implements Controller {
       const userLoginResponse: UserLoginResponse = await this.userLogin.run({ email, password });
 
       res.status(httpStatus.OK).send({
-        token: userLoginResponse.token
+        token: userLoginResponse.token,
+        user: userLoginResponse.user
       });
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

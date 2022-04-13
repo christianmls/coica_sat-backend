@@ -31,6 +31,6 @@ export class JwtUserLoginService implements UserLoginService {
       id: user.id.value
     }, JWT_SECRET, { expiresIn: '48h' });
 
-    return new UserLogged(token);
+    return new UserLogged(token, user);
   }
 }

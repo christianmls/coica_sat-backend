@@ -7,4 +7,5 @@ export type CreateUserRequest = {
   lastNames: string;
   phone: string;
   birthDate: Date;
+  country: string;
 };

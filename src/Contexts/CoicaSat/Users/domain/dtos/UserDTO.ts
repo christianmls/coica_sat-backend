@@ -6,8 +6,9 @@ export class UserDTO {
   public readonly phone: string;
   public readonly birthDate: Date;
   public readonly role: Array<string>;
+  public readonly country: string;
 
-  constructor(id: string, email: string, names: string, lastNames: string, phone: string,  birthDate: Date, role: Array<string>) {
+  constructor(id: string, email: string, names: string, lastNames: string, phone: string,  birthDate: Date, role: Array<string>, country: string) {
     this.id = id;
     this.email = email;
     this.names = names;
@@ -15,5 +16,6 @@ export class UserDTO {
     this.phone = phone;
     this.birthDate = birthDate;
     this.role = role;
+    this.country = country;
   }
 }

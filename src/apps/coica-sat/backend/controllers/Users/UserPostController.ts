@@ -12,6 +12,7 @@ type UserPostRequest = Request & {
     lastNames: string;
     phone: string;
     birthDate: Date;
+    country: string;
   };
 };
 export class UserPostController implements Controller {
@@ -19,8 +20,8 @@ export class UserPostController implements Controller {
 
   async run(req: UserPostRequest, res: Response) {
     try {
-      const { id, email, password, role, names, lastNames, phone, birthDate } = req.body;
-      await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate });
+      const { id, email, password, role, names, lastNames, phone, birthDate, country } = req.body;
+      await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate, country });
       res.status(httpStatus.CREATED).send();
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

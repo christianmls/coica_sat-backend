@@ -5,11 +5,11 @@ import {User} from '../../domain/User';
 export class UserMapper implements  IUserMapper {
   constructor() {}
 
-  public transformList(roles: User[]): UserDTO[] {
-    return roles.map(role => this.transformToDTO(role));
+  public transformList(users: User[]): UserDTO[] {
+    return users.map(user => this.transformToDTO(user));
   }
 
-  public transformToDTO(role: User): UserDTO {
-    return new UserDTO(role.id.value, role.email, role.names, role.lastNames, role.phone,  role.birthDate, role.role);
+  public transformToDTO(user: User): UserDTO {
+    return new UserDTO(user.id.value, user.email, user.names, user.lastNames, user.phone,  user.birthDate, user.role, user.country);
   }
 }

@@ -13,6 +13,7 @@ export interface UserDocument {
   phone: string;
   birthDate: Date;
   role: string;
+  country: string;
 }
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
@@ -28,7 +29,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       lastNames: document.lastNames,
       phone: document.phone,
       birthDate: document.birthDate,
-      role: document.role
+      role: document.role,
+      country: document.country
     }) : null;
   }
 
@@ -42,7 +44,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       names: user.names,
       lastNames: user.lastNames,
       phone: user.phone,
-      birthDate: user.birthDate
+      birthDate: user.birthDate,
+      country: user.country
     })) ?? [];
   }
 
@@ -56,7 +59,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       names: user.names,
       lastNames: user.lastNames,
       phone: user.phone,
-      birthDate: user.birthDate
+      birthDate: user.birthDate,
+      country: user.country
     })) ?? [];
   }
 
@@ -78,7 +82,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       names: document.names,
       lastNames: document.lastNames,
       phone: document.phone,
-      birthDate: document.birthDate
+      birthDate: document.birthDate,
+      country: document.country
     }) : null;
   }
 

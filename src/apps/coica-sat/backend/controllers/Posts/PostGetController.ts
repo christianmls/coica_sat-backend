@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
 import {PostFinder} from '../../../../../Contexts/CoicaSat/Posts/application/PostFinder';
+import {getPaginationFromQuery} from '../../services/Utility';
 
 
 export class PostGetController implements Controller {
@@ -9,7 +10,8 @@ export class PostGetController implements Controller {
 
   async run(req: Request, res: Response) {
       try {
-        const posts = await this.postFinder.run();
+        const { pageNumber, nPerPage } = getPaginationFromQuery(req);
+        const posts = await this.postFinder.run({ pageNumber, nPerPage });
         res.status(httpStatus.OK).send(posts);
       }  catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

@@ -48,9 +48,17 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
     return this.removeById(id.value);
   }
 
+  public async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
+    const hrDefenderSheetDocuments = await this.findAll<HRDefenderSheetDocument>({}, pagination);
+    return this.hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments as HRDefenderSheetDocument[]);
+  }
+
   async getAll(): Promise<HRDefenderSheet[]> {
     const hrDefenderSheetDocuments = await this.findAll<HRDefenderSheetDocument>();
+    return this.hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments as HRDefenderSheetDocument[]);
+  }
 
+  private hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments: HRDefenderSheetDocument[]): HRDefenderSheet[] {
     return hrDefenderSheetDocuments?.map(hrDefenderSheet => {
       return HRDefenderSheet.fromPrimitives({
         id: hrDefenderSheet._id,
@@ -92,12 +100,15 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
       });
     }) ?? [];
   }
-
   save(hRDefenderSheet: HRDefenderSheet): Promise<void> {
     return this.persist(hRDefenderSheet.id.value, hRDefenderSheet);
   }
 
+  public count(): Promise<number> {
+    return this.countDocuments();
+  }
   protected collectionName(): string {
     return 'hr-defender-sheets';
   }
+
 }

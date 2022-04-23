@@ -46,6 +46,20 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
     })) ?? [];
   }
 
+  async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
+    const users = await this.findAll<UserDocument>({}, pagination);
+    return users?.map(user => User.fromPrimitives({
+      id: user._id,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+      names: user.names,
+      lastNames: user.lastNames,
+      phone: user.phone,
+      birthDate: user.birthDate
+    })) ?? [];
+  }
+
   public save(user: User): Promise<void> {
     return this.persist(user.id.value, user);
   }
@@ -66,6 +80,10 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       phone: document.phone,
       birthDate: document.birthDate
     }) : null;
+  }
+
+  public count(): Promise<number> {
+    return this.countDocuments();
   }
 
   protected collectionName(): string {

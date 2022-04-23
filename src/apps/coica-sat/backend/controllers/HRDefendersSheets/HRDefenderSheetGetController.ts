@@ -4,6 +4,7 @@ import { Controller } from '../Controller';
 import {
   HRDefenderSheetFinder
 } from '../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetFinder';
+import {getPaginationFromQuery} from '../../services/Utility';
 
 
 export class HRDefenderSheetGetController implements Controller {
@@ -11,7 +12,8 @@ export class HRDefenderSheetGetController implements Controller {
 
   async run(req: Request, res: Response) {
     try {
-      const hrDefendersSheets = await this.postFinder.run();
+      const { pageNumber, nPerPage } = getPaginationFromQuery(req);
+      const hrDefendersSheets = await this.postFinder.run({ pageNumber, nPerPage });;
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

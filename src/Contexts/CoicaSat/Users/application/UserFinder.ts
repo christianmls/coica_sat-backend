@@ -1,6 +1,6 @@
 import {UserRepository} from '../domain/UserRepository';
 import {IUserMapper} from '../domain/UserMapper';
-import {UserDTO} from '../domain/dtos/UserDTO';
+import {PaginateItemsResponse} from '../../Shared/application/PaginateItemsResponse';
 
 export class UserFinder {
   private repository: UserRepository;
@@ -11,8 +11,10 @@ export class UserFinder {
     this.iUserMapper =  roleMapper;
   }
 
-  async run(): Promise<Array<UserDTO>> {
-    const users = await this.repository.searchAll();
-    return this.iUserMapper.transformList(users);
+  async run({ pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
+    const totalUsers = await this.repository.count();
+    const users = await this.repository.searchAllPaginated({ pageNumber, nPerPage });
+    const usersPrimitives = this.iUserMapper.transformList(users);
+    return new PaginateItemsResponse(usersPrimitives, totalUsers, nPerPage, pageNumber);
   }
 }

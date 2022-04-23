@@ -22,6 +22,16 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
     })) ?? [];
   }
 
+  async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
+    const posts = await this.findAll<PostDocument>({}, pagination);
+    return posts?.map(post => Post.fromPrimitives({
+      id: post._id,
+      description: post.description,
+      images: post.images,
+      userCreatorId: post.userCreatorId,
+    })) ?? [];
+  }
+
   public save(post: Post): Promise<void> {
     return this.persist(post.id.value, post);
   }
@@ -39,6 +49,10 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       images: document.images,
       userCreatorId: document.userCreatorId,
     }) : null;
+  }
+
+  public count(): Promise<number> {
+    return this.countDocuments();
   }
 
   protected collectionName(): string {

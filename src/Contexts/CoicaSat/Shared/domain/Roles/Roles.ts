@@ -1,6 +1,6 @@
 export enum Roles {
   USER = 'user',
   ADMIN = 'admin',
-  ADMINISTRATOR = 'administrator',
+  MONITOR = 'monitor',
   FOCAL_POINT = 'focalPoint',
 }

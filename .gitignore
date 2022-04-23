@@ -6,4 +6,4 @@ data
 test-results.xml
 .idea
 .env
-src/apps/coica-sat/backend/public/uploads/
+public/

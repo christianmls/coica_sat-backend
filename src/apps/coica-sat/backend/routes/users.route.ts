@@ -21,6 +21,8 @@ const validator = joiValidator.createValidator({});
  *         - lastNames
  *         - phone
  *         - birthDate
+ *         - country
+ *         - photo
  *       properties:
  *         id:
  *           type: string
@@ -47,6 +49,13 @@ const validator = joiValidator.createValidator({});
  *           type: Date
  *           description: The birth date of the user
  *           example: "2020-01-01"
+ *         country:
+ *           type: string
+ *           description: The country of the user
+ *           example: "Colombia"
+ *         photo:
+ *           type: string
+ *           description: The photo of the user
  */
 
 /**

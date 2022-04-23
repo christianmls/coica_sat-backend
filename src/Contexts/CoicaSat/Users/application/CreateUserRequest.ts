@@ -8,4 +8,5 @@ export type CreateUserRequest = {
   phone: string;
   birthDate: Date;
   country: string;
+  photo: string;
 };

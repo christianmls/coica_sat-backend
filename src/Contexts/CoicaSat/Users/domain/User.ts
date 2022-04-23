@@ -13,8 +13,9 @@ export class User extends AggregateRoot {
   public readonly  birthDate: Date;
   public readonly role: Array<string>;
   public readonly country: string;
+  public readonly photo: string;
 
-  constructor({id, email, password, role, names, lastNames, phone, birthDate, country }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, phone: string, birthDate: Date, country: string}) {
+  constructor({id, email, password, role, names, lastNames, phone, birthDate, country, photo }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, phone: string, birthDate: Date, country: string, photo: string}) {
     super();
 
     this.ensurePasswordLength(password);
@@ -28,6 +29,7 @@ export class User extends AggregateRoot {
     this.phone = phone;
     this.birthDate = birthDate;
     this.country = country;
+    this.photo = photo;
   }
 
   private ensurePasswordLength(password: string): void {
@@ -36,7 +38,7 @@ export class User extends AggregateRoot {
     }
   }
 
-  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: string, country: string}): User {
+  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: string, country: string, photo: string}): User {
     return new User({
       id: new UserId(planData.id),
       email: planData.email,
@@ -46,7 +48,8 @@ export class User extends AggregateRoot {
       lastNames: planData.lastNames,
       phone: planData.phone,
       birthDate: planData.birthDate,
-      country: planData.country
+      country: planData.country,
+      photo: planData.photo
     });
   }
 
@@ -60,7 +63,8 @@ export class User extends AggregateRoot {
       phone: this.phone,
       birthDate: this.birthDate,
       role: this.role,
-      country: this.country
+      country: this.country,
+      photo: this.photo
     };
   }
 }

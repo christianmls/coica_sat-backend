@@ -9,5 +9,5 @@ export const UserSchema = Joi.object().keys({
   birthDate: Joi.date().required(),
   country: Joi.string().required(),
   community: Joi.string().required(),
-  photo: Joi.string().required()
+  photo: Joi.any().optional()
 });

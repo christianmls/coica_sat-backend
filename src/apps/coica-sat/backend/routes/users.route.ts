@@ -23,6 +23,7 @@ const validator = joiValidator.createValidator({});
  *         - birthDate
  *         - country
  *         - photo
+ *         - community
  *       properties:
  *         id:
  *           type: string
@@ -56,6 +57,10 @@ const validator = joiValidator.createValidator({});
  *         photo:
  *           type: string
  *           description: The photo of the user
+ *         community:
+ *           type: string
+ *           description: The community of the user
+ *           example: "Colombia"
  */
 
 /**

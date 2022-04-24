@@ -38,8 +38,16 @@ export class HRDefenderSheet extends AggregateRoot {
   public readonly organizationPersonName: string;
   public readonly status: string;
   public readonly processing: boolean;
+  public readonly mobileLatitude: string;
+  public readonly mobileLongitude: string;
+  public readonly mobileAddress: string;
+  public readonly gpsId: string;
+  public readonly xLongitude: string;
+  public readonly yLatitude: string;
+  public readonly zRise: string;
+  public readonly description: string;
 
-  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: Array<string>, rightsViolatedType: Array<string>, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: Array<string>, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: Array<string>, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: Array<string>, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string, status: string, processing: boolean) {
+  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: Array<string>, rightsViolatedType: Array<string>, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: Array<string>, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: Array<string>, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: Array<string>, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string, status: string, processing: boolean, mobileLatitude: string, mobileLongitude: string, mobileAddress: string, gpsId: string, xLongitude: string, yLatitude: string, zRise: string, description: string) {
     super();
     this.id = id;
     this.country = country;
@@ -77,6 +85,14 @@ export class HRDefenderSheet extends AggregateRoot {
     this.organizationPersonName = organizationPersonName;
     this.status = status;
     this.processing = processing;
+    this.mobileLatitude = mobileLatitude;
+    this.mobileLongitude = mobileLongitude;
+    this.mobileAddress = mobileAddress;
+    this.gpsId = gpsId;
+    this.xLongitude = xLongitude;
+    this.yLatitude = yLatitude;
+    this.zRise = zRise;
+    this.description = description;
   }
 
   public static fromPrimitives({
@@ -116,6 +132,14 @@ export class HRDefenderSheet extends AggregateRoot {
     organizationPersonName,
     status,
     processing,
+    mobileLatitude,
+    mobileLongitude,
+    mobileAddress,
+    gpsId,
+    xLongitude,
+    yLatitude,
+    zRise,
+    description
   }: {
     id: string,
     country: string,
@@ -152,7 +176,15 @@ export class HRDefenderSheet extends AggregateRoot {
     organizationName: string,
     organizationPersonName: string,
     status: string,
-    processing: boolean
+    processing: boolean,
+    mobileLatitude: string;
+    mobileLongitude: string;
+    mobileAddress: string;
+    gpsId: string;
+    xLongitude: string;
+    yLatitude: string;
+    zRise: string;
+    description: string;
   }): HRDefenderSheet {
     return new HRDefenderSheet(
       new HRDefenderSheetId(id),
@@ -190,7 +222,15 @@ export class HRDefenderSheet extends AggregateRoot {
       organizationName,
       organizationPersonName,
       status,
-      processing
+      processing,
+      mobileLatitude,
+      mobileLongitude,
+      mobileAddress,
+      gpsId,
+      xLongitude,
+      yLatitude,
+      zRise,
+      description
     );
   }
   toPrimitives(): any {
@@ -230,7 +270,15 @@ export class HRDefenderSheet extends AggregateRoot {
       organizationName: this.organizationName,
       organizationPersonName: this.organizationPersonName,
       status: this.status,
-      processing: this.processing
+      processing: this.processing,
+      mobileLatitude: this.mobileLatitude,
+      mobileLongitude: this.mobileLongitude,
+      mobileAddress: this.mobileAddress,
+      gpsId: this.gpsId,
+      xLongitude: this.xLongitude,
+      yLatitude: this.yLatitude,
+      zRise: this.zRise,
+      description: this.description
     };
   }
 }

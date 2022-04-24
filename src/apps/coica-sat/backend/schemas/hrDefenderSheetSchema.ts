@@ -36,5 +36,13 @@ export const HrDefenderSheetSchema = Joi.object().keys({
   organizationName: Joi.string().required(),
   organizationPersonName: Joi.string().required(),
   status: Joi.string().optional(),
-  processing: Joi.boolean().optional()
+  processing: Joi.boolean().optional(),
+  mobileLatitude: Joi.any().optional(),
+  mobileLongitude: Joi.any().optional(),
+  mobileAddress: Joi.any().optional(),
+  gpsId: Joi.any().optional(),
+  xLongitude: Joi.any().optional(),
+  yLatitude: Joi.any().optional(),
+  zRise: Joi.any().optional(),
+  description: Joi.any().optional()
 });

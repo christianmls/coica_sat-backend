@@ -15,6 +15,7 @@ export interface UserDocument {
   role: string;
   country: string;
   photo: string;
+  community: string;
 }
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
@@ -32,7 +33,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       birthDate: document.birthDate,
       role: document.role,
       country: document.country,
-      photo: document.photo
+      photo: document.photo,
+      community: document.community
     }) : null;
   }
 
@@ -48,7 +50,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       phone: user.phone,
       birthDate: user.birthDate,
       country: user.country,
-      photo: user.photo
+      photo: user.photo,
+      community: user.community
     })) ?? [];
   }
 
@@ -64,7 +67,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       phone: user.phone,
       birthDate: user.birthDate,
       country: user.country,
-      photo: user.photo
+      photo: user.photo,
+      community: user.community
     })) ?? [];
   }
 
@@ -88,7 +92,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       phone: document.phone,
       birthDate: document.birthDate,
       country: document.country,
-      photo: document.photo
+      photo: document.photo,
+      community: document.community
     }) : null;
   }
 

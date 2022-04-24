@@ -46,7 +46,15 @@ export class HRDefenderSheetCreator {
       toWhomWasRequested: request.toWhomWasRequested,
       UTMCoordinates: request.UTMCoordinates,
       status: request.status,
-      processing: request.processing
+      processing: request.processing,
+      mobileLatitude: request.mobileLatitude,
+      mobileLongitude: request.mobileLongitude,
+      mobileAddress: request.mobileAddress,
+      gpsId: request.gpsId,
+      xLongitude: request.xLongitude,
+      yLatitude: request.yLatitude,
+      zRise: request.zRise,
+      description: request.description
     });
     return this.repository.save(hrDefenderSheet);
   }

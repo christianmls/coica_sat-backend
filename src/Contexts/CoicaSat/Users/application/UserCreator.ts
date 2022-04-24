@@ -24,6 +24,7 @@ export class UserCreator {
       birthDate: request.birthDate,
       country: request.country,
       photo: request.photo,
+      community: request.community
     });
     const userExists = await this.repository.findByEmail(user.email);
     if (userExists) {

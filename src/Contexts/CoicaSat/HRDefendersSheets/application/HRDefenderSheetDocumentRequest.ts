@@ -35,4 +35,12 @@ export type HRDefenderSheetDocumentRequest = {
   organizationPersonName: string;
   status: string;
   processing: boolean;
+  mobileLatitude: string;
+  mobileLongitude: string;
+  mobileAddress: string;
+  gpsId: string;
+  xLongitude: string;
+  yLatitude: string;
+  zRise: string;
+  description: string;
 };

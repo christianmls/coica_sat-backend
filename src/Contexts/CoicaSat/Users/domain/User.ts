@@ -14,8 +14,9 @@ export class User extends AggregateRoot {
   public readonly role: Array<string>;
   public readonly country: string;
   public readonly photo: string;
+  public readonly community: string;
 
-  constructor({id, email, password, role, names, lastNames, phone, birthDate, country, photo }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, phone: string, birthDate: Date, country: string, photo: string}) {
+  constructor({id, email, password, role, names, lastNames, phone, birthDate, country, photo, community }: {id: UserId, email: string, password: string, role: string, names: string, lastNames: string, phone: string, birthDate: Date, country: string, photo: string, community: string}) {
     super();
 
     this.ensurePasswordLength(password);
@@ -30,6 +31,7 @@ export class User extends AggregateRoot {
     this.birthDate = birthDate;
     this.country = country;
     this.photo = photo;
+    this.community = community;
   }
 
   private ensurePasswordLength(password: string): void {
@@ -38,7 +40,7 @@ export class User extends AggregateRoot {
     }
   }
 
-  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: string, country: string, photo: string}): User {
+  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: string, country: string, photo: string, community: string}): User {
     return new User({
       id: new UserId(planData.id),
       email: planData.email,
@@ -49,7 +51,8 @@ export class User extends AggregateRoot {
       phone: planData.phone,
       birthDate: planData.birthDate,
       country: planData.country,
-      photo: planData.photo
+      photo: planData.photo,
+      community: planData.community
     });
   }
 
@@ -64,7 +67,8 @@ export class User extends AggregateRoot {
       birthDate: this.birthDate,
       role: this.role,
       country: this.country,
-      photo: this.photo
+      photo: this.photo,
+      community: this.community
     };
   }
 }

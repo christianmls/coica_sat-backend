@@ -9,4 +9,5 @@ export type CreateUserRequest = {
   birthDate: Date;
   country: string;
   photo: string;
+  community: string;
 };

@@ -40,6 +40,14 @@ interface HRDefenderSheetDocument {
   organizationPersonName: string;
   status: string;
   processing: boolean;
+  mobileLatitude: string;
+  mobileLongitude: string;
+  mobileAddress: string;
+  gpsId: string;
+  xLongitude: string;
+  yLatitude: string;
+  zRise: string;
+  description: string;
 }
 
 export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSheet> implements HRDefenderSheetRepository {
@@ -96,7 +104,15 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
         organizationName: hrDefenderSheet.organizationName,
         organizationPersonName: hrDefenderSheet.organizationPersonName,
         status: hrDefenderSheet.status,
-        processing: hrDefenderSheet.processing
+        processing: hrDefenderSheet.processing,
+        mobileLatitude: hrDefenderSheet.mobileLatitude,
+        mobileLongitude: hrDefenderSheet.mobileLongitude,
+        mobileAddress: hrDefenderSheet.mobileAddress,
+        gpsId: hrDefenderSheet.gpsId,
+        xLongitude: hrDefenderSheet.xLongitude,
+        yLatitude: hrDefenderSheet.yLatitude,
+        zRise: hrDefenderSheet.zRise,
+        description: hrDefenderSheet.description
       });
     }) ?? [];
   }

@@ -22,14 +22,137 @@ const validator = joiValidator.createValidator({});
  *       required:
  *         - id
  *         - country
+ *         - threatType
+ *         - location
+ *         - originTown
+ *         - threatOtherType
+ *         - rightsViolatedType
+ *         - rightsViolatedOtherType
+ *         - responseType
+ *         - relationShipCOVIDType
+ *         - relationShipCOVIDOtherType
+ *         - threatAuthor
+ *         - factsReported
+ *         - informationSource
+ *         - informationSourceOther
+ *         - indicateMeans
+ *         - thereWasLegalAction
+ *         - thereWasAndAnswered
+ *         - defenderName
+ *         - UTMCoordinates
+ *         - contactDetails
+ *         - communityBase
+ *         - completedBy
+ *         - personName
+ *         - requestCountry
+ *         - requestType
+ *         - requestAuthor
+ *         - requestNumber
+ *         - toWhomWasRequested
+ *         - requestDescription
+ *         - requestShortDescription
+ *         - reportingCommunityBase
+ *         - organizationName
+ *         - organizationPersonName
+ *         - mobileLatitude
+ *         - mobileLongitude
+ *         - mobileAddress
+ *         - gpsId
+ *         - xLongitude
+ *         - yLatitude
+ *         - zRise
+ *         - description
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the appointment
+ *           description: The auto-generated id of the hr defender sheet
  *         country:
  *           type: string
- *           description: The country of the appointment
+ *           description: The country of the hr defender sheet
  *           example: "USA"
+ *         threatType:
+ *           type: string
+ *           description: The threat type of the hr defender sheet
+ *           example: "COVID-19"
+ *           enum:
+ *             - "COVID-19"
+ *             - "COVID-19"
+ *         location:
+ *           type: string
+ *           description: The location of the hr defender sheet
+ *           example: "USA"
+ *         originTown:
+ *           type: string
+ *           description: The origin town of the hr defender sheet
+ *           example: "USA"
+ *         threatOtherType:
+ *           type: string
+ *           description: The threat other type of the hr defender sheet
+ *           example: "COVID-19"
+ *         rightsViolatedType:
+ *           type: string
+ *           description: The rights violated type of the hr defender sheet
+ *           example: "COVID-19"
+ *         rightsViolatedOtherType:
+ *           type: string
+ *           description: The rights violated other type of the hr defender sheet
+ *           example: "COVID-19"
+ *         responseType:
+ *           type: string
+ *           description: The response type of the hr defender sheet
+ *           example: "COVID-19"
+ *         relationShipCOVIDType:
+ *           type: string
+ *           description: The relation ship COVID type of the hr defender sheet
+ *           example: "COVID-19"
+ *         relationShipCOVIDOtherType:
+ *           type: string
+ *           description: The relation ship COVID other type of the hr defender sheet
+ *           example: "COVID-19"
+ *         threatAuthor:
+ *           type: string
+ *           description: The threat author of the hr defender sheet
+ *           example: "COVID-19"
+ *         factsReported:
+ *           type: string
+ *           description: The facts reported of the hr defender sheet
+ *           example: "COVID-19"
+ *         informationSource:
+ *           type: string
+ *           description: The information source of the hr defender sheet
+ *           example: "COVID-19"
+ *         informationSourceOther:
+ *           type: string
+ *           description: The information source other of the hr defender sheet
+ *           example: "COVID-19"
+ *         indicateMeans:
+ *           type: string
+ *           description: The indicate means of the hr defender sheet
+ *           example: "COVID-19"
+ *         thereWasLegalAction:
+ *           type: string
+ *           description: The there was legal action of the hr defender sheet
+ *           example: "COVID-19"
+ *         thereWasAndAnswered:
+ *           type: string
+ *           description: The there was and answered of the hr defender sheet
+ *           example: "COVID-19"
+ *         defenderName:
+ *           type: string
+ *           description: The defender name of the hr defender sheet
+ *           example: "COVID-19"
+ *         UTMCoordinates:
+ *           type: string
+ *           description: The utm coordinates of the hr defender sheet
+ *           example: "COVID-19"
+ *         contactDetails:
+ *           type: string
+ *           description: The contact details of the hr defender sheet
+ *           example: "COVID-19"
+ *         communityBase:
+ *           type: string
+ *           description: The community base of the hr defender sheet
+ *           example: "COVID-19"
  *       example:
  *         id: d5fE_asz
  *         country: "USA"

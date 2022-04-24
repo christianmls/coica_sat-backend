@@ -14,6 +14,7 @@ type UserPostRequest = Request & {
     birthDate: Date;
     country: string;
     photo: string;
+    community: string;
   };
 };
 export class UserPostController implements Controller {
@@ -21,8 +22,8 @@ export class UserPostController implements Controller {
 
   async run(req: UserPostRequest, res: Response) {
     try {
-      const { id, email, password, role, names, lastNames, phone, birthDate, country, photo } = req.body;
-      await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate, country, photo });
+      const { id, email, password, role, names, lastNames, phone, birthDate, country, photo, community } = req.body;
+      await this.userCreator.run({ id, email, password, role, names, lastNames, phone, birthDate, country, photo, community });
       res.status(httpStatus.CREATED).send();
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

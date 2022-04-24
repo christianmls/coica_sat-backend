@@ -6,6 +6,7 @@ import {
   HRDefenderSheetCreator
 } from '../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetCreator';
 
+
 export type HRDefenderSheetBodyRequest = UserLoggedRequest & Request & {
   body: {
     id: string;
@@ -42,6 +43,14 @@ export type HRDefenderSheetBodyRequest = UserLoggedRequest & Request & {
     reportingCommunityBase: string;
     organizationName: string;
     organizationPersonName: string;
+    mobileLatitude: string;
+    mobileLongitude: string;
+    mobileAddress: string;
+    gpsId: string;
+    xLongitude: string;
+    yLatitude: string;
+    zRise: string;
+    description: string;
   }
 };
 

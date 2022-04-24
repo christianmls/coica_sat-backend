@@ -7,3 +7,7 @@ export const getPaginationFromQuery  = (req: Request): { pageNumber: number; nPe
     nPerPage: Number(nPerPage) || 10
   };
 }
+
+export const getUserFromRequest = (req: any) => {
+  return req.user;
+};

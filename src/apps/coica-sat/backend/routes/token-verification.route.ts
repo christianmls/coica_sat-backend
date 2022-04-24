@@ -1,8 +1,8 @@
 import { Router, Response } from 'express';
 import container from '../dependency-injection';
 import {TokenVerificationGetController} from '../controllers/TokensVerification/TokenVerificationGetController';
-import { AuthorizeService  } from './../services/AuthorizeService';
 import {UserLoggedRequest} from '../shared/types';
+import {verifyTokenByRoles} from '../services/AuthorizeService';
 
 /**
  * @swagger
@@ -51,5 +51,5 @@ export const register = (router: Router) => {
    *               type: object
    */
   // @ts-ignore
-  router.get('/token-me',  AuthorizeService.verify, (req: UserLoggedRequest, res: Response) => tokenVerificationGetController.run(req, res));
+  router.get('/token-me',  verifyTokenByRoles(), (req: UserLoggedRequest, res: Response) => tokenVerificationGetController.run(req, res));
 };

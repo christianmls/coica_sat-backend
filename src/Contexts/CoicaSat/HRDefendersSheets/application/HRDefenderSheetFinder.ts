@@ -8,9 +8,9 @@ export class HRDefenderSheetFinder {
     this.repository = repository;
   }
 
-  async run({ pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const totalHrDefenderSheets = await this.repository.count();
-    const hrDefenderSheets = await this.repository.searchAllPaginated({ pageNumber, nPerPage });
+  async run(query: object, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
+    const totalHrDefenderSheets = await this.repository.count(query);
+    const hrDefenderSheets = await this.repository.searchAllPaginated(query, { pageNumber, nPerPage });
     const hrDefenderSheetsPrimitives = hrDefenderSheets.map(hrDefenderSheet => hrDefenderSheet.toPrimitives());
     return new PaginateItemsResponse(hrDefenderSheetsPrimitives, totalHrDefenderSheets, nPerPage, pageNumber);
   }

@@ -48,8 +48,8 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
     return this.removeById(id.value);
   }
 
-  public async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
-    const hrDefenderSheetDocuments = await this.findAll<HRDefenderSheetDocument>({}, pagination);
+  public async searchAllPaginated(query: object, pagination: { pageNumber: number, nPerPage: number }) {
+    const hrDefenderSheetDocuments = await this.findAll<HRDefenderSheetDocument>(query, pagination);
     return this.hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments as HRDefenderSheetDocument[]);
   }
 
@@ -104,8 +104,8 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
     return this.persist(hRDefenderSheet.id.value, hRDefenderSheet);
   }
 
-  public count(): Promise<number> {
-    return this.countDocuments();
+  public count(query: object): Promise<number> {
+    return this.countDocuments(query);
   }
   protected collectionName(): string {
     return 'hr-defender-sheets';

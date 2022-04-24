@@ -4,8 +4,8 @@ import { Controller } from '../Controller';
 import {
   HRDefenderSheetFinder
 } from '../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetFinder';
-import {getPaginationFromQuery} from '../../services/Utility';
-
+import {getPaginationFromQuery, getUserFromRequest} from '../../services/Utility';
+import {Roles} from '../../../../../Contexts/CoicaSat/Shared/domain/Roles/Roles';
 
 export class HRDefenderSheetGetController implements Controller {
   constructor(private postFinder: HRDefenderSheetFinder) {}
@@ -13,7 +13,13 @@ export class HRDefenderSheetGetController implements Controller {
   async run(req: Request, res: Response) {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
-      const hrDefendersSheets = await this.postFinder.run({ pageNumber, nPerPage });;
+      const { role, country, id } =  getUserFromRequest(req);
+      const query = role.includes(Roles.FOCAL_POINT) ? {
+        country
+      } : role.includes(Roles.USER) ? {
+        user: id
+      } : {};
+      const hrDefendersSheets = await this.postFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

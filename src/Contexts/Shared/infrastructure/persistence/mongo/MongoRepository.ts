@@ -18,7 +18,7 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   protected async countDocuments(query: object = {}): Promise<number> {
     return (await this.collection()).countDocuments(query);
   }
-  
+
   protected async persist(id: string, aggregateRoot: T): Promise<void> {
     const collection = await this.collection();
 
@@ -40,7 +40,7 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   }
 
   protected async findAll<Document>(
-    query: {[key: string]: string} = {},
+    query: object = {},
     pagination: Nullable<{ pageNumber: number, nPerPage: number }> = null): Promise<Nullable<Array<Document>>> {
     const collection = await this.collection();
 

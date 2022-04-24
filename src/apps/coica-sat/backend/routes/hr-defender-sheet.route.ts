@@ -7,6 +7,7 @@ import {HRDefenderSheetPutController} from '../controllers/HRDefendersSheets/HRD
 import {HRDefenderSheetDeleteController} from '../controllers/HRDefendersSheets/HRDefenderSheetDeleteController';
 import {HRDefenderSheetPostController} from '../controllers/HRDefendersSheets/HRDefenderSheetPostController';
 import {HrDefenderSheetSchema} from '../schemas/hrDefenderSheetSchema';
+import {verifyTokenByRoles} from '../services/AuthorizeService';
 
 
 const validator = joiValidator.createValidator({});
@@ -61,7 +62,7 @@ export const register = (router: Router) => {
    */
   const hrDefenderSheetGetController: HRDefenderSheetGetController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetGetController');
   // @ts-ignore
-  router.get('/hr-defenders-sheets',  ( req: Request, res: Response ) => hrDefenderSheetGetController.run(req, res));
+  router.get('/hr-defenders-sheets',   verifyTokenByRoles(), (req: Request, res: Response ) => hrDefenderSheetGetController.run(req, res));
 
   /**
    * @swagger

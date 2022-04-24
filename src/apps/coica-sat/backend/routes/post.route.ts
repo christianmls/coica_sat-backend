@@ -3,10 +3,10 @@ import container from '../dependency-injection';
 import joiValidator from 'express-joi-validation';
 import {PostPostController} from '../controllers/Posts/PostPostController';
 import {PostSchema} from '../schemas/PostSchema';
-import {AuthorizeService} from '../services/AuthorizeService';
 import {PostGetController} from '../controllers/Posts/PostGetController';
 import {PostPutController} from '../controllers/Posts/PostPutController';
 import {PostDeleteController} from '../controllers/Posts/PostDeleteController';
+import {verifyTokenByRoles} from '../services/AuthorizeService';
 
 const validator = joiValidator.createValidator({});
 
@@ -67,7 +67,7 @@ export const register = (router: Router) => {
    */
   const postPostController: PostPostController = container.get('Apps.CoicaSat.controllers.PostPostController');
   // @ts-ignore
-  router.post('/post',  AuthorizeService.verify, validator.body(PostSchema),  (req: Request, res: Response) => postPostController.run(req, res));
+  router.post('/post',  verifyTokenByRoles(), validator.body(PostSchema),  (req: Request, res: Response) => postPostController.run(req, res));
 
   /**
    * @swagger
@@ -86,7 +86,8 @@ export const register = (router: Router) => {
    *                 $ref: '#/components/schemas/Post'
    */
   const postGetController: PostGetController = container.get('Apps.CoicaSat.controllers.PostGetController');
-  router.get('/posts',   (req: Request, res: Response) => postGetController.run(req, res));
+  // @ts-ignore
+  router.get('/posts',   verifyTokenByRoles(), (req: Request, res: Response) => postGetController.run(req, res));
 
   /**
    * @swagger
@@ -121,7 +122,7 @@ export const register = (router: Router) => {
    */
   const postPutController: PostPutController = container.get('Apps.CoicaSat.controllers.PostPutController');
   // @ts-ignore
-  router.put('/post/:id', validator.body(PostSchema),  ( req: Request, res: Response ) => postPutController.run(req, res));
+  router.put('/post/:id', verifyTokenByRoles(), validator.body(PostSchema),  ( req: Request, res: Response ) => postPutController.run(req, res));
 
   /**
    * @swagger
@@ -145,5 +146,5 @@ export const register = (router: Router) => {
    */
   const postDeleteController: PostDeleteController = container.get('Apps.CoicaSat.controllers.PostDeleteController');
   // @ts-ignore
-  router.delete('/post/:id', (req: Request, res: Response) => postDeleteController.run(req, res));
+  router.delete('/post/:id',  verifyTokenByRoles(), (req: Request, res: Response) => postDeleteController.run(req, res));
 };

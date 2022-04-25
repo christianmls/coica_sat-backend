@@ -57,3 +57,7 @@ services:
   Apps.CoicaSat.controllers.HRDefenderSheetGetController:
     class: ../../controllers/HRDefendersSheets/HRDefenderSheetGetController
     arguments: [ "@CoicaSat.HRDefendersSheets.application.HRDefenderSheetFinder" ]
+
+imports:
+  - { resource: ./ApplicationForMonitoring/application.yaml }
+

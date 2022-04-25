@@ -1,0 +1,16 @@
+services:
+  CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository:
+    class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/infrastructure/persistence/MongoApplicationForMonitoringRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator:
+    class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringCreator
+    arguments: ['@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository']
+
+  CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringRemover:
+    class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringRemover
+    arguments: [ '@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository' ]
+
+  CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringFinder:
+    class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringFinder
+    arguments: [ '@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository' ]

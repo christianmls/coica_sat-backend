@@ -6,3 +6,4 @@ imports:
   - { resource: ./UsersLogin/application.yaml }
   - { resource: ./Posts/application.yaml }
   - { resource: ./HRDefendersSheets/application.yaml }
+  - { resource: ./ApplicationsForMonitoring/application.yaml }

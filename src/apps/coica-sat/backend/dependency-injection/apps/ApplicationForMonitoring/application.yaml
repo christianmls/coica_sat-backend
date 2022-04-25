@@ -1,0 +1,16 @@
+services:
+  Apps.CoicaSat.controllers.ApplicationForMonitoringPostController:
+    class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringPostController
+    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator" ]
+
+  Apps.CoicaSat.controllers.ApplicationForMonitoringPutController:
+    class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringPutController
+    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator" ]
+
+  Apps.CoicaSat.controllers.ApplicationForMonitoringGetController:
+    class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringGetController
+    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringFinder" ]
+
+  Apps.CoicaSat.controllers.ApplicationForMonitoringDeleteController:
+    class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringDeleteController
+    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringRemover" ]

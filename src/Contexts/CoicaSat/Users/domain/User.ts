@@ -1,6 +1,10 @@
 import {AggregateRoot} from '../../../Shared/domain/AggregateRoot';
 import {UserId} from '../../Shared/domain/Users/UserId';
 import {InvalidArgumentError} from '../../../Shared/domain/value-object/InvalidArgumentError';
+import {
+  applicationForMonitoringStatusList
+} from '../../ApplicationsForMonitoring/domain/applicationForMonitoringStatusList';
+import {Roles} from '../../Shared/domain/Roles/Roles';
 
 export class User extends AggregateRoot {
 
@@ -11,7 +15,7 @@ export class User extends AggregateRoot {
   public readonly lastNames: string;
   public readonly phone: string;
   public readonly  birthDate: Date;
-  public readonly role: Array<string>;
+  public  role: Array<string>;
   public readonly country: string;
   public readonly photo: string;
   public readonly community: string;
@@ -70,5 +74,13 @@ export class User extends AggregateRoot {
       photo: this.photo,
       community: this.community
     };
+  }
+
+  public updateRoleByStatus(status: string): void {
+    if (status === applicationForMonitoringStatusList.APPROVED) {
+      this.role.push(Roles.MONITOR);
+    } else if (status === applicationForMonitoringStatusList.REJECTED) {
+      this.role = this.role.filter(role => role !== Roles.MONITOR);
+    }
   }
 }

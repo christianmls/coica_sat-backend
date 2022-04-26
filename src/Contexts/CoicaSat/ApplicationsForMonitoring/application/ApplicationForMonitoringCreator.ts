@@ -28,7 +28,7 @@ export class ApplicationForMonitoringCreator {
       if (!user) {
         throw new Error('User not found');
       }
-      user.updateRoleByStatus(applicationForMonitoring.status);
+      user.updateRoleByApplicationForMonitoringStatus(applicationForMonitoring.status);
       await this.userRepository.save(user);
     }
     return this.repository.save(applicationForMonitoring);

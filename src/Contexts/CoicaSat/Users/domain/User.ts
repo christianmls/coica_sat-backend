@@ -76,7 +76,7 @@ export class User extends AggregateRoot {
     };
   }
 
-  public updateRoleByStatus(status: string): void {
+  public updateRoleByApplicationForMonitoringStatus(status: string): void {
     if (status === applicationForMonitoringStatusList.APPROVED) {
       this.role.push(Roles.MONITOR);
     } else if (status === applicationForMonitoringStatusList.REJECTED) {

@@ -5,7 +5,7 @@ services:
 
   CoicaSat.HRDefendersSheets.application.HRDefenderSheetCreator:
     class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetCreator
-    arguments: ['@CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository']
+    arguments: ['@CoicaSat.HRDefendersSheets.domain.HRDefenderSheetRepository', '@CoicaSat.HRDefendersSheetsHistory.domain.HRDefenderSheetHistoryRepository']
 
   CoicaSat.HRDefendersSheets.application.HRDefenderSheetRemover:
     class: ../../../../../Contexts/CoicaSat/HRDefendersSheets/application/HRDefenderSheetRemover

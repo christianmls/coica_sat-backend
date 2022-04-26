@@ -1,0 +1,8 @@
+services:
+  CoicaSat.HRDefendersSheetsHistory.domain.HRDefenderSheetHistoryRepository:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheetsHistory/infrastructure/persistence/MongoHRDefenderSheetHistoryRepository
+    arguments: ['@Shared.CoicaSat.ConnectionManager']
+
+  CoicaSat.HRDefendersSheetsHistory.application.HRDefenderSheetHistoryFinder:
+    class: ../../../../../Contexts/CoicaSat/HRDefendersSheetsHistory/application/HRDefenderSheetHistoryFinder
+    arguments: [ '@CoicaSat.HRDefendersSheetsHistory.domain.HRDefenderSheetHistoryRepository' ]

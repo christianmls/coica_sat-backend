@@ -60,4 +60,5 @@ services:
 
 imports:
   - { resource: ./ApplicationForMonitoring/application.yaml }
+  - { resource: ./HRDefendersSheetsHistory/application.yaml }
 

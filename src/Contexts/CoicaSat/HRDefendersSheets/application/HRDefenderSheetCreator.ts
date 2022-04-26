@@ -1,12 +1,18 @@
 import {HRDefenderSheetRepository} from '../domain/HRDefenderSheetRepository';
 import {HRDefenderSheetDocumentRequest} from './HRDefenderSheetDocumentRequest';
 import {HRDefenderSheet} from '../domain/HRDefenderSheet';
+import {HRDefenderSheetHistoryRepository} from '../../HRDefendersSheetsHistory/domain/HRDefenderSheetHistoryRepository';
+import {HRDefenderSheetHistory} from '../../HRDefendersSheetsHistory/domain/HRDefenderSheetHistory';
+import {HRDefenderSheetHistoryId} from '../../Shared/domain/HRDefenderSheetHistory/HRDefenderSheetHistoryId';
+import { diff } from 'deep-object-diff';
 
 export class HRDefenderSheetCreator {
   private repository: HRDefenderSheetRepository;
+  private historyRepository: HRDefenderSheetHistoryRepository;
 
-  constructor(repository: HRDefenderSheetRepository) {
+  constructor(repository: HRDefenderSheetRepository, historyRepository: HRDefenderSheetHistoryRepository) {
     this.repository = repository;
+    this.historyRepository = historyRepository;
   }
 
   async run(request: HRDefenderSheetDocumentRequest): Promise<void> {
@@ -56,6 +62,19 @@ export class HRDefenderSheetCreator {
       zRise: request.zRise,
       description: request.description
     });
-    return this.repository.save(hrDefenderSheet);
+    await this.repository.save(hrDefenderSheet);
+    const oldDocument = await this.repository.searchById(hrDefenderSheet.id);
+    if (oldDocument) {
+      const newDocument = diff(oldDocument.toPrimitives(), hrDefenderSheet.toPrimitives());
+      const hrDefenderSheetHistory = HRDefenderSheetHistory.fromPrimitives({
+        id: new HRDefenderSheetHistoryId().value,
+        documentId: hrDefenderSheet.id.value,
+        date: new Date(),
+        authorId: hrDefenderSheet.requestAuthor,
+        oldDocument: hrDefenderSheet,
+        newDocument
+      });
+      return this.historyRepository.save(hrDefenderSheetHistory);
+    }
   }
 }

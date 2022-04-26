@@ -1,0 +1,4 @@
+services:
+  Apps.CoicaSat.controllers.HRDefenderSheetHistoryGetController:
+    class: ../../../controllers/HRDefendersSheetsHistory/HRDefenderSheetHistoryGetController
+    arguments: [ "@CoicaSat.HRDefendersSheetsHistory.application.HRDefenderSheetHistoryFinder" ]

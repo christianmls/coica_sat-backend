@@ -2,6 +2,7 @@ import {HRDefenderSheetRepository} from '../../domain/HRDefenderSheetRepository'
 import {MongoRepository} from '../../../../Shared/infrastructure/persistence/mongo/MongoRepository';
 import {HRDefenderSheet} from '../../domain/HRDefenderSheet';
 import {HRDefenderSheetId} from '../../../Shared/domain/HRDefendersSheets/HRDefenderSheetId';
+import {Nullable} from '../../../../Shared/domain/Nullable';
 
 interface HRDefenderSheetDocument {
     _id: string;
@@ -64,6 +65,57 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
   async getAll(): Promise<HRDefenderSheet[]> {
     const hrDefenderSheetDocuments = await this.findAll<HRDefenderSheetDocument>();
     return this.hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments as HRDefenderSheetDocument[]);
+  }
+
+  public async searchById(id: HRDefenderSheetId): Promise<Nullable<HRDefenderSheet>> {
+    const hrDefenderSheet = await this.findOne<HRDefenderSheetDocument>({ _id: id.value });
+
+    return hrDefenderSheet ? HRDefenderSheet.fromPrimitives({
+      id: id.value,
+      country: hrDefenderSheet.country,
+      threatType: hrDefenderSheet.threatType,
+      location: hrDefenderSheet.location,
+      originTown: hrDefenderSheet.originTown,
+      threatOtherType: hrDefenderSheet.threatOtherType,
+      rightsViolatedType: hrDefenderSheet.rightsViolatedType,
+      rightsViolatedOtherType: hrDefenderSheet.rightsViolatedOtherType,
+      responseType: hrDefenderSheet.responseType,
+      relationShipCOVIDType: hrDefenderSheet.relationShipCOVIDType,
+      relationShipCOVIDOtherType: hrDefenderSheet.relationShipCOVIDOtherType,
+      threatAuthor: hrDefenderSheet.threatAuthor,
+      factsReported: hrDefenderSheet.factsReported,
+      informationSource: hrDefenderSheet.informationSource,
+      informationSourceOther: hrDefenderSheet.informationSourceOther,
+      indicateMeans: hrDefenderSheet.indicateMeans,
+      thereWasLegalAction: hrDefenderSheet.thereWasLegalAction,
+      thereWasAndAnswered: hrDefenderSheet.thereWasAndAnswered,
+      defenderName: hrDefenderSheet.defenderName,
+      UTMCoordinates: hrDefenderSheet.UTMCoordinates,
+      contactDetails: hrDefenderSheet.contactDetails,
+      communityBase: hrDefenderSheet.communityBase,
+      completedBy: hrDefenderSheet.completedBy,
+      personName: hrDefenderSheet.personName,
+      requestCountry: hrDefenderSheet.requestCountry,
+      requestType: hrDefenderSheet.requestType,
+      requestAuthor: hrDefenderSheet.requestAuthor,
+      requestNumber: hrDefenderSheet.requestNumber,
+      toWhomWasRequested: hrDefenderSheet.toWhomWasRequested,
+      requestDescription: hrDefenderSheet.requestDescription,
+      requestShortDescription: hrDefenderSheet.requestShortDescription,
+      reportingCommunityBase: hrDefenderSheet.reportingCommunityBase,
+      organizationName: hrDefenderSheet.organizationName,
+      organizationPersonName: hrDefenderSheet.organizationPersonName,
+      status: hrDefenderSheet.status,
+      processing: hrDefenderSheet.processing,
+      mobileLatitude: hrDefenderSheet.mobileLatitude,
+      mobileLongitude: hrDefenderSheet.mobileLongitude,
+      mobileAddress: hrDefenderSheet.mobileAddress,
+      gpsId: hrDefenderSheet.gpsId,
+      xLongitude: hrDefenderSheet.xLongitude,
+      yLatitude: hrDefenderSheet.yLatitude,
+      zRise: hrDefenderSheet.zRise,
+      description: hrDefenderSheet.description
+    }) : null;
   }
 
   private hrDefenderSheetDocumentsToPrimitives(hrDefenderSheetDocuments: HRDefenderSheetDocument[]): HRDefenderSheet[] {

@@ -14,6 +14,7 @@ export class HRDefenderSheetGetController implements Controller {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
       const { role, country, id } =  getUserFromRequest(req);
+      console.log(role, country, id);
       const query = role.includes(Roles.FOCAL_POINT) ? {
         country
       } : role.includes(Roles.USER) ? {

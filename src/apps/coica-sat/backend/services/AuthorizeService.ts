@@ -19,9 +19,10 @@ export const verifyTokenByRoles = (roles: Array<string> = [Roles.USER]) => (req:
 
     req.user = {
       id: user.id,
-      role: user.role,
+      role: user.roles,
       country: user.country
     };
+
     next();
   } catch (error) {
     res.status(401).send('No tienes acceso a este recurso');

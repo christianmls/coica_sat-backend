@@ -62,8 +62,9 @@ export class HRDefenderSheetCreator {
       zRise: request.zRise,
       description: request.description
     });
-    await this.repository.save(hrDefenderSheet);
     const oldDocument = await this.repository.searchById(hrDefenderSheet.id);
+    await this.repository.save(hrDefenderSheet);
+
     if (oldDocument) {
       const newDocument = diff(oldDocument.toPrimitives(), hrDefenderSheet.toPrimitives());
       const hrDefenderSheetHistory = HRDefenderSheetHistory.fromPrimitives({

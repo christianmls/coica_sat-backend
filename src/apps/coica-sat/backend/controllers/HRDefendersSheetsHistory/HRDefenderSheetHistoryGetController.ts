@@ -12,7 +12,7 @@ export class HRDefenderSheetHistoryGetController implements Controller {
   async run(req: Request, res: Response) {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
-      const query = {}
+      const query = {};
       const hrDefendersSheets = await this.hrDefenderSheetHistoryFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {

@@ -14,7 +14,9 @@ export class ApplicationForMonitoringCreator {
   }
 
   async run(request: ApplicationForMonitoringRequest): Promise<void> {
-    await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
+    if (request.id)  {
+      await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
+    }
     const applicationForMonitoring = ApplicationForMonitoring.fromPrimitives({
       id: request.id,
       status: request.status,
@@ -22,7 +24,6 @@ export class ApplicationForMonitoringCreator {
       details: request.details,
       userId: request.userId
     });
-
 
     if (this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.APPROVED) ||
       this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.REJECTED)) {

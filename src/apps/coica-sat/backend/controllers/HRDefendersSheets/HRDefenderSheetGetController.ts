@@ -14,12 +14,13 @@ export class HRDefenderSheetGetController implements Controller {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
       const { role, country, id } =  getUserFromRequest(req);
-      console.log(role, country, id);
-      const query = role.includes(Roles.FOCAL_POINT) ? {
-        country
-      } : role.includes(Roles.USER) ? {
+
+      const query = role.includes(Roles.ADMIN)  ? {} : role.includes(Roles.USER) ? {
         user: id
-      } : {};
+      } : role.includes(Roles.FOCAL_POINT) ? {
+        country
+      } : { not_accessible: true };
+
       const hrDefendersSheets = await this.postFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {

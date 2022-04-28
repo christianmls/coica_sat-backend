@@ -27,6 +27,8 @@ export class JwtUserLoginService implements UserLoginService {
       throw new Error('Password is incorrect');
     }
 
+    console.log(user);
+
     const token = jwt.sign({
       id: user.id.value,
       roles: user.role,

@@ -17,7 +17,7 @@ export class UserCreator {
       id: request.id,
       email: request.email,
       password: this.encryption.encrypt(request.password),
-      role: request.role,
+      role: request.role ?? ['user'],
       names: request.names,
       lastNames: request.lastNames,
       phone: request.phone,

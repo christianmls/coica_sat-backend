@@ -12,7 +12,7 @@ export interface UserDocument {
   lastNames: string;
   phone: string;
   birthDate: Date;
-  role: string;
+  role: Array<string>;
   country: string;
   photo: string;
   community: string;

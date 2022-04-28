@@ -13,4 +13,4 @@ services:
 
   CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringFinder:
     class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringFinder
-    arguments: [ '@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository' ]
+    arguments: [ '@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository', '@CoicaSat.Users.domain.UserRepository' ]

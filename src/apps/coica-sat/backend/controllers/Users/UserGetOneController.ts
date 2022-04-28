@@ -9,8 +9,8 @@ export class UserGetOneController implements Controller {
   async run(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const department = await this.userByIdFinder.run(id);
-      res.status(httpStatus.OK).send(department);
+      const user = await this.userByIdFinder.run(id);
+      res.status(httpStatus.OK).send(user);
     }  catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
         error: String(error)

@@ -14,6 +14,7 @@ export class ApplicationForMonitoringCreator {
   }
 
   async run(request: ApplicationForMonitoringRequest): Promise<void> {
+    await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
     const applicationForMonitoring = ApplicationForMonitoring.fromPrimitives({
       id: request.id,
       status: request.status,
@@ -21,6 +22,7 @@ export class ApplicationForMonitoringCreator {
       details: request.details,
       userId: request.userId
     });
+
 
     if (this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.APPROVED) ||
       this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.REJECTED)) {
@@ -35,5 +37,14 @@ export class ApplicationForMonitoringCreator {
   }
   private compareStatuses(status1: string, status2: string): boolean {
     return status1 === status2;
+  }
+
+  private async validateIfApplicationForMonitoringExistsByUserId(userId: string) {
+    const applicationsForMonitoring = await this.repository.getAll();
+    const  applicationForMonitoringByUser = applicationsForMonitoring
+      .find((application: ApplicationForMonitoring) => application.userId .value === userId);
+    if (applicationForMonitoringByUser) {
+      throw new Error('El usuario ya tiene una solicitud de monitoria');
+    }
   }
 }

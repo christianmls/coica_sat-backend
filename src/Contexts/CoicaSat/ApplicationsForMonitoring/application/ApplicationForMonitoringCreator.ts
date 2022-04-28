@@ -14,7 +14,7 @@ export class ApplicationForMonitoringCreator {
   }
 
   async run(request: ApplicationForMonitoringRequest): Promise<void> {
-    if (request.id)  {
+    if (!request.id)  {
       await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
     }
     const applicationForMonitoring = ApplicationForMonitoring.fromPrimitives({

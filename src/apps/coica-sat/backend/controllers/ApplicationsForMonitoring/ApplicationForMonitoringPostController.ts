@@ -17,7 +17,7 @@ export class ApplicationForMonitoringPostController implements Controller {
       const date = new Date();
       const status = applicationForMonitoringStatusList.REQUESTED;
       const { id: userId} = getUserFromRequest(req);
-      const details = 'Solicitud de monitoreo enviada';
+      const details = 'Solicitud para monitor enviada';
       await this.applicationForMonitoringCreator.run({
         ...body,
         status,

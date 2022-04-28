@@ -4,56 +4,63 @@ import {UserId} from '../../Shared/domain/Users/UserId';
 
 export class ApplicationForMonitoring extends AggregateRoot {
   public readonly id: ApplicationForMonitoringId;
-  public readonly date: Date;
   public readonly status: string;
   public readonly details: string;
   public readonly userId: UserId;
+  public readonly createdAt: Date;
+  public readonly updatedAt: Date;
 
   constructor(
     id: ApplicationForMonitoringId,
-    date: Date,
+    createdAt: Date,
     status: string,
     details: string,
     userId: UserId,
+    updatedAt: Date
   ) {
     super();
     this.id = id;
-    this.date = date;
+    this.createdAt = createdAt;
     this.status = status;
     this.details = details;
     this.userId = userId;
+    this.updatedAt = updatedAt;
   }
 
   public static fromPrimitives({
       id,
-      date,
+     createdAt,
       status,
       details,
       userId,
+      updatedAt
     }: {
       id: string;
-      date: Date;
+      createdAt: Date;
       status: string;
       details: string;
       userId: string;
+      updatedAt: Date;
     }
   ): ApplicationForMonitoring {
     return new ApplicationForMonitoring(
       new ApplicationForMonitoringId(id),
-      new Date(date),
+      new Date(createdAt),
       status,
       details,
       new UserId(userId),
+      new Date(updatedAt)
     );
   }
 
   toPrimitives(): any {
     return {
       id: this.id.value,
-      date: this.date,
+      createdAt: this.createdAt,
       status: this.status,
       details: this.details,
       userId: this.userId.value,
+      updatedAt: this.updatedAt
     };
   }
 }

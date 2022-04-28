@@ -14,7 +14,6 @@ export class ApplicationForMonitoringPostController implements Controller {
   async run(req: ApplicationForMonitoringBodyRequest, res: Response) {
     try {
       const { body  } = req;
-      const date = new Date();
       const status = applicationForMonitoringStatusList.REQUESTED;
       const { id: userId} = getUserFromRequest(req);
       const details = 'Solicitud para monitor enviada';
@@ -22,8 +21,7 @@ export class ApplicationForMonitoringPostController implements Controller {
         ...body,
         status,
         details,
-        userId,
-        date
+        userId
       });
       res.status(httpStatus.CREATED).send();
     }  catch (error) {

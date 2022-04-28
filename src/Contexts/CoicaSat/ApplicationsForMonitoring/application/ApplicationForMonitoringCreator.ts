@@ -3,6 +3,8 @@ import {ApplicationForMonitoringRequest} from './ApplicationForMonitoringRequest
 import {ApplicationForMonitoring} from '../domain/ApplicationForMonitoring';
 import {applicationForMonitoringStatusList} from '../domain/applicationForMonitoringStatusList';
 import {UserRepository} from '../../Users/domain/UserRepository';
+import {ApplicationForMonitoringId} from '../../Shared/domain/ApplicationsForMonitoring/ApplicationForMonitoringId';
+import {Nullable} from '../../../Shared/domain/Nullable';
 
 export class ApplicationForMonitoringCreator {
   private repository: ApplicationForMonitoringRepository;
@@ -14,15 +16,23 @@ export class ApplicationForMonitoringCreator {
   }
 
   async run(request: ApplicationForMonitoringRequest): Promise<void> {
-    if (!request.id)  {
+    const isCreateAction = !request.id;
+    let createdAt = new Date();
+    const updatedAt = new Date();
+    let applicationForMonitoringDB: Nullable<ApplicationForMonitoring>;
+
+    if (!isCreateAction)  {
       await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
+      applicationForMonitoringDB = await this.repository.searchById(new ApplicationForMonitoringId(request.id));
+      createdAt = applicationForMonitoringDB?.createdAt ?? new Date();
     }
     const applicationForMonitoring = ApplicationForMonitoring.fromPrimitives({
       id: request.id,
       status: request.status,
-      date: request.date,
+      createdAt,
       details: request.details,
-      userId: request.userId
+      userId: request.userId,
+      updatedAt
     });
 
     if (this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.APPROVED) ||

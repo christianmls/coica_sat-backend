@@ -2,13 +2,15 @@ import {MongoRepository} from '../../../../Shared/infrastructure/persistence/mon
 import {ApplicationForMonitoring} from '../../domain/ApplicationForMonitoring';
 import {ApplicationForMonitoringRepository} from '../../domain/ApplicationForMonitoringRepository';
 import {ApplicationForMonitoringId} from '../../../Shared/domain/ApplicationsForMonitoring/ApplicationForMonitoringId';
+import {Nullable} from '../../../../Shared/domain/Nullable';
 
 interface ApplicationForMonitoringDocument {
   _id: string;
-  date: Date;
+  createdAt: Date;
   status: string;
   details: string;
   userId: string;
+  updatedAt: Date;
 }
 export class MongoApplicationForMonitoringRepository extends MongoRepository<ApplicationForMonitoring> implements ApplicationForMonitoringRepository {
 
@@ -26,14 +28,28 @@ export class MongoApplicationForMonitoringRepository extends MongoRepository<App
     return this.applicationForMonitoringDocumentsToPrimitives(applicationForMonitoringDocuments as ApplicationForMonitoringDocument[]);
   }
 
+  public async searchById(id: ApplicationForMonitoringId): Promise<Nullable<ApplicationForMonitoring>> {
+    const document = await this.findOne<ApplicationForMonitoringDocument>( { _id: id.value });
+
+    return document ? ApplicationForMonitoring.fromPrimitives({
+      id: document._id,
+      createdAt: document.createdAt,
+      status: document.status,
+      details: document.details,
+      userId: document.userId,
+      updatedAt: document.updatedAt
+    }) : null;
+  }
+
   private applicationForMonitoringDocumentsToPrimitives(applicationForMonitoringDocuments: ApplicationForMonitoringDocument[]): ApplicationForMonitoring[] {
     return applicationForMonitoringDocuments?.map(applicationForMonitoring => {
       return ApplicationForMonitoring.fromPrimitives({
         id: applicationForMonitoring._id,
-        date: applicationForMonitoring.date,
+        createdAt: applicationForMonitoring.createdAt,
         status: applicationForMonitoring.status,
         details: applicationForMonitoring.details,
-        userId: applicationForMonitoring.userId
+        userId: applicationForMonitoring.userId,
+        updatedAt: applicationForMonitoring.updatedAt
       });
     }) ?? [];
   }

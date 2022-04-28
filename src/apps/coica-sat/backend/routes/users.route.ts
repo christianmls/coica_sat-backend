@@ -5,6 +5,8 @@ import {UserGetController} from '../controllers/Users/UserGetController';
 import joiValidator from 'express-joi-validation';
 import {UserSchema} from '../schemas/UserSchema';
 import {UserDeleteController} from '../controllers/Users/UserDeleteController';
+import {UserGetOneController} from '../controllers/Users/UserGetOneController';
+import {verifyTokenByRoles} from '../services/AuthorizeService';
 
 const validator = joiValidator.createValidator({});
 
@@ -116,6 +118,32 @@ export const register = (router: Router) => {
   const userGetController: UserGetController = container.get('Apps.CoicaSat.controllers.UserGetController');
   router.get('/users',   (req: Request, res: Response) => userGetController.run(req, res));
 
+  /**
+   * @swagger
+   * /user/{id}:
+   *   get:
+   *     summary: Get the user by id
+   *     tags: [Users]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: The user id
+   *     responses:
+   *       200:
+   *         description: The user description by id
+   *         contents:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       404:
+   *         description: The user was not found
+   */
+  const userGetOneController: UserGetOneController = container.get('Apps.CoicaSat.controllers.UserGetOneController');
+  // @ts-ignore
+  router.get('/user/:id',  verifyTokenByRoles(),  ( req: Request, res: Response ) => userGetOneController.run(req, res));
 
   /**
    * @swagger

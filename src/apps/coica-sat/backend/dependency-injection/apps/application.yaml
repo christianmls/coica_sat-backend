@@ -23,6 +23,10 @@ services:
     class: ../../controllers/Users/UserGetController
     arguments: [ "@CoicaSat.Users.application.UserFinder" ]
 
+  Apps.CoicaSat.controllers.UserGetOneController:
+    class: ../../controllers/Users/UserGetOneController
+    arguments: [ "@CoicaSat.Users.application.UserFinder" ]
+
   Apps.CoicaSat.controllers.TokenVerificationGetController:
     class: ../../controllers/TokensVerification/TokenVerificationGetController
 

@@ -5,7 +5,7 @@ services:
 
   CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator:
     class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringCreator
-    arguments: ['@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository']
+    arguments: ['@CoicaSat.ApplicationsForMonitoring.domain.ApplicationForMonitoringRepository', '@CoicaSat.Users.domain.UserRepository']
 
   CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringRemover:
     class: ../../../../../Contexts/CoicaSat/ApplicationsForMonitoring/application/ApplicationForMonitoringRemover

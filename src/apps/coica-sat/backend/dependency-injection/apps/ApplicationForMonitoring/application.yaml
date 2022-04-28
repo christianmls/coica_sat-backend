@@ -1,7 +1,7 @@
 services:
   Apps.CoicaSat.controllers.ApplicationForMonitoringPostController:
     class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringPostController
-    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator" , '@CoicaSat.Users.domain.UserRepository']
+    arguments: [ "@CoicaSat.ApplicationsForMonitoring.application.ApplicationForMonitoringCreator" ]
 
   Apps.CoicaSat.controllers.ApplicationForMonitoringPutController:
     class: ../../../controllers/ApplicationsForMonitoring/ApplicationForMonitoringPutController

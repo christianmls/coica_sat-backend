@@ -12,10 +12,13 @@ export class ApplicationForMonitoringFinder {
   }
 
   async run(query: object, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const totalApplicationsForMonitoring = await this.repository.count(query);
-    const applicationsForMonitoring = await this.repository.searchAllPaginated(query, { pageNumber, nPerPage });
+    console.log(query);
+
+    const applicationsForMonitoring = await this.repository.getAll( );
     const applicationsForMonitoringPrimitives = await this.addUserToApplicationsForMonitoring(applicationsForMonitoring);
-    return new PaginateItemsResponse(applicationsForMonitoringPrimitives, totalApplicationsForMonitoring, nPerPage, pageNumber);
+    const applicationsForMonitoringPrimitivesByUserCountry = this.filterByUserCountry(applicationsForMonitoringPrimitives, query);
+    const totalApplicationsForMonitoring = applicationsForMonitoringPrimitivesByUserCountry.length;
+    return new PaginateItemsResponse(this.paginatedItems(applicationsForMonitoringPrimitivesByUserCountry, pageNumber, nPerPage), totalApplicationsForMonitoring, nPerPage, pageNumber);
   }
   private async addUserToApplicationsForMonitoring(applicationsForMonitoring: any[]) {
     return await Promise.all(applicationsForMonitoring.map(async applicationForMonitoring => {
@@ -25,5 +28,18 @@ export class ApplicationForMonitoringFinder {
         user: user?.toPrimitives() ?? {}
       };
     }));
+  }
+
+  private filterByUserCountry(applicationsForMonitoringPrimitives: any[], query: any) {
+    return applicationsForMonitoringPrimitives.filter(applicationForMonitoringPrimitive => {
+      const user = applicationForMonitoringPrimitive.user;
+      return user.country === query['country'];
+    });
+  }
+
+  private paginatedItems(items: any[], pageNumber: number, nPerPage: number) {
+    const start = (pageNumber - 1) * nPerPage;
+    const end = start + nPerPage;
+    return items.slice(start, end);
   }
 }

@@ -18,6 +18,7 @@ export class ApplicationForMonitoringGetController implements Controller {
       const query = role.includes(Roles.ADMIN)  ? {}  : role.includes(Roles.FOCAL_POINT) ? {
         country
       } : { userCreatorId };
+      console.log(query);
       const paginateItemsResponse = await this.applicationForMonitoringFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(paginateItemsResponse);
     }  catch (error) {

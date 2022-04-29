@@ -7,6 +7,7 @@ import {UserSchema} from '../schemas/UserSchema';
 import {UserDeleteController} from '../controllers/Users/UserDeleteController';
 import {UserGetOneController} from '../controllers/Users/UserGetOneController';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
+import {Roles} from '../../../../Contexts/CoicaSat/Shared/domain/Roles/Roles';
 
 const validator = joiValidator.createValidator({});
 
@@ -97,7 +98,8 @@ export const register = (router: Router) => {
    *         description: Some server error
    */
   const userPostController: UserPostController = container.get('Apps.CoicaSat.controllers.UserPostController');
-  router.post('/user',  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
+  // @ts-ignore
+  router.post('/user',  verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR),  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
 
   /**
    * @swagger
@@ -116,7 +118,8 @@ export const register = (router: Router) => {
    *                 $ref: '#/components/schemas/User'
    */
   const userGetController: UserGetController = container.get('Apps.CoicaSat.controllers.UserGetController');
-  router.get('/users',   (req: Request, res: Response) => userGetController.run(req, res));
+  // @ts-ignore
+  router.get('/users',   verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR),  (req: Request, res: Response) => userGetController.run(req, res));
 
   /**
    * @swagger
@@ -167,5 +170,5 @@ export const register = (router: Router) => {
    */
   const userDeleteController: UserDeleteController = container.get('Apps.CoicaSat.controllers.UserDeleteController');
   // @ts-ignore
-  router.delete('/user/:id', (req: Request, res: Response) => userDeleteController.run(req, res));
+  router.delete('/user/:id',   verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR), (req: Request, res: Response) => userDeleteController.run(req, res));
 };

@@ -8,6 +8,7 @@ import {HRDefenderSheetDeleteController} from '../controllers/HRDefendersSheets/
 import {HRDefenderSheetPostController} from '../controllers/HRDefendersSheets/HRDefenderSheetPostController';
 import {HrDefenderSheetSchema} from '../schemas/hrDefenderSheetSchema';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
+import {Roles} from '../../../../Contexts/CoicaSat/Shared/domain/Roles/Roles';
 
 
 const validator = joiValidator.createValidator({});
@@ -185,7 +186,7 @@ export const register = (router: Router) => {
    */
   const hrDefenderSheetGetController: HRDefenderSheetGetController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetGetController');
   // @ts-ignore
-  router.get('/hr-defenders-sheets',   verifyTokenByRoles(), (req: Request, res: Response ) => hrDefenderSheetGetController.run(req, res));
+  router.get('/hr-defenders-sheets',   verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR), (req: Request, res: Response ) => hrDefenderSheetGetController.run(req, res));
 
   /**
    * @swagger
@@ -211,7 +212,7 @@ export const register = (router: Router) => {
    */
   const appointmentPostController: HRDefenderSheetPostController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetPostController');
   // @ts-ignore
-  router.post('/hr-defender-sheet', validator.body(HrDefenderSheetSchema),  ( req: Request, res: Response ) => appointmentPostController.run(req, res));
+  router.post('/hr-defender-sheet', verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR), validator.body(HrDefenderSheetSchema),  ( req: Request, res: Response ) => appointmentPostController.run(req, res));
 
 
   /**
@@ -247,7 +248,7 @@ export const register = (router: Router) => {
    */
   const hrDefenderSheetPutController: HRDefenderSheetPutController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetPutController');
   // @ts-ignore
-  router.put('/hr-defender-sheet/:id', validator.body(HrDefenderSheetSchema),   (req: Request, res: Response) => hrDefenderSheetPutController.run(req, res));
+  router.put('/hr-defender-sheet/:id', verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR),  validator.body(HrDefenderSheetSchema),   (req: Request, res: Response) => hrDefenderSheetPutController.run(req, res));
 
   /**
    * @swagger
@@ -271,5 +272,5 @@ export const register = (router: Router) => {
    */
   const hrDefenderSheetDeleteController: HRDefenderSheetDeleteController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetDeleteController');
   // @ts-ignore
-  router.delete('/hr-defender-sheet/:id', (req: Request, res: Response) => hrDefenderSheetDeleteController.run(req, res));
+  router.delete('/hr-defender-sheet/:id', verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR), (req: Request, res: Response) => hrDefenderSheetDeleteController.run(req, res));
 };

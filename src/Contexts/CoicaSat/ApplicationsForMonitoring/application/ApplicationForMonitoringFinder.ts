@@ -11,12 +11,13 @@ export class ApplicationForMonitoringFinder {
     this.userRepository = userRepository;
   }
 
-  async run(query: object, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
+  async run(query: any, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
     console.log(query);
 
     const applicationsForMonitoring = await this.repository.getAll( );
     const applicationsForMonitoringPrimitives = await this.addUserToApplicationsForMonitoring(applicationsForMonitoring);
-    const applicationsForMonitoringPrimitivesByUserCountry = this.filterByUserCountry(applicationsForMonitoringPrimitives, query);
+    const applicationsForMonitoringPrimitivesByUserCountry = query['country'] ?
+      this.filterByUserCountry(applicationsForMonitoringPrimitives, query) : applicationsForMonitoringPrimitives;
     const totalApplicationsForMonitoring = applicationsForMonitoringPrimitivesByUserCountry.length;
     return new PaginateItemsResponse(this.paginatedItems(applicationsForMonitoringPrimitivesByUserCountry, pageNumber, nPerPage), totalApplicationsForMonitoring, nPerPage, pageNumber);
   }

@@ -18,7 +18,6 @@ export class HRDefenderSheetGetController implements Controller {
       const query = role.includes(Roles.ADMIN)  ? {}  : role.includes(Roles.FOCAL_POINT) ? {
         country
       } : { userCreatorId };
-
       const hrDefendersSheets = await this.postFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {

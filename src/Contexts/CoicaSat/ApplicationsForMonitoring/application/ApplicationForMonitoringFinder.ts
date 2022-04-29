@@ -12,9 +12,8 @@ export class ApplicationForMonitoringFinder {
   }
 
   async run(query: any, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    console.log(query);
-
-    const applicationsForMonitoring = await this.repository.getAll( );
+    const queryDB = query['userCreatorId'] ? { userCreatorId: query['userCreatorId'] } : {};
+    const applicationsForMonitoring = await this.repository.getAll(queryDB);
     const applicationsForMonitoringPrimitives = await this.addUserToApplicationsForMonitoring(applicationsForMonitoring);
     const applicationsForMonitoringPrimitivesByUserCountry = query['country'] ?
       this.filterByUserCountry(applicationsForMonitoringPrimitives, query) : applicationsForMonitoringPrimitives;

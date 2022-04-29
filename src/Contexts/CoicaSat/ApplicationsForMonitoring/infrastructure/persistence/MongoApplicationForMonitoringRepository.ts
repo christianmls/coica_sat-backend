@@ -23,8 +23,8 @@ export class MongoApplicationForMonitoringRepository extends MongoRepository<App
     return this.applicationForMonitoringDocumentsToPrimitives(applicationForMonitoringDocuments as ApplicationForMonitoringDocument[]);
   }
 
-  async getAll(): Promise<ApplicationForMonitoring[]> {
-    const applicationForMonitoringDocuments = await this.findAll<ApplicationForMonitoringDocument>();
+  async getAll(query: object): Promise<ApplicationForMonitoring[]> {
+    const applicationForMonitoringDocuments = await this.findAll<ApplicationForMonitoringDocument>(query);
     return this.applicationForMonitoringDocumentsToPrimitives(applicationForMonitoringDocuments as ApplicationForMonitoringDocument[]);
   }
 

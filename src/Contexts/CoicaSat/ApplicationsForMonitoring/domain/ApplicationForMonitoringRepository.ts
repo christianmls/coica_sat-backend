@@ -4,7 +4,7 @@ import {Nullable} from '../../../Shared/domain/Nullable';
 
 
 export interface ApplicationForMonitoringRepository {
-  getAll(): Promise<ApplicationForMonitoring[]>;
+  getAll(query: object): Promise<ApplicationForMonitoring[]>;
   searchAllPaginated(query: object, pagination: { pageNumber: number, nPerPage: number }): Promise<ApplicationForMonitoring[]>;
   searchById(id: ApplicationForMonitoringId): Promise<Nullable<ApplicationForMonitoring>>;
   save(HRDefenderSheet: ApplicationForMonitoring): Promise<void>;

@@ -99,7 +99,7 @@ export const register = (router: Router) => {
    */
   const userPostController: UserPostController = container.get('Apps.CoicaSat.controllers.UserPostController');
   // @ts-ignore
-  router.post('/user',  verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR),  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
+  router.post('/user',  verifyTokenByRoles(),  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
 
   /**
    * @swagger

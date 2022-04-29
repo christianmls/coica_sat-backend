@@ -1,14 +1,12 @@
 import { Router, Request, Response } from 'express';
 import container from '../dependency-injection';
-import joiValidator from 'express-joi-validation';
 import {PostPostController} from '../controllers/Posts/PostPostController';
 import {PostSchema} from '../schemas/PostSchema';
 import {PostGetController} from '../controllers/Posts/PostGetController';
 import {PostPutController} from '../controllers/Posts/PostPutController';
 import {PostDeleteController} from '../controllers/Posts/PostDeleteController';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
-
-const validator = joiValidator.createValidator({});
+import {validateBody} from '../schemas/JoiModule';
 
 /**
  * @swagger
@@ -67,7 +65,7 @@ export const register = (router: Router) => {
    */
   const postPostController: PostPostController = container.get('Apps.CoicaSat.controllers.PostPostController');
   // @ts-ignore
-  router.post('/post',  verifyTokenByRoles(), validator.body(PostSchema),  (req: Request, res: Response) => postPostController.run(req, res));
+  router.post('/post',  verifyTokenByRoles(), validateBody(PostSchema),  (req: Request, res: Response) => postPostController.run(req, res));
 
   /**
    * @swagger
@@ -122,7 +120,7 @@ export const register = (router: Router) => {
    */
   const postPutController: PostPutController = container.get('Apps.CoicaSat.controllers.PostPutController');
   // @ts-ignore
-  router.put('/post/:id', verifyTokenByRoles(), validator.body(PostSchema),  ( req: Request, res: Response ) => postPutController.run(req, res));
+  router.put('/post/:id', verifyTokenByRoles(), validateBody(PostSchema),  ( req: Request, res: Response ) => postPutController.run(req, res));
 
   /**
    * @swagger

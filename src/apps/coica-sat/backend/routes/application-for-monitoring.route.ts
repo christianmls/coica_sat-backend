@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 import container from '../dependency-injection';
-import joiValidator from 'express-joi-validation';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
 import {
   ApplicationForMonitoringPostController
@@ -15,8 +14,7 @@ import {
   ApplicationForMonitoringDeleteController
 } from '../controllers/ApplicationsForMonitoring/ApplicationForMonitoringDeleteController';
 import {ApplicationForMonitoringSchema} from '../schemas/ApplicationForMonitoringSchema';
-
-const validator = joiValidator.createValidator({});
+import {validateBody} from '../schemas/JoiModule';
 
 /**
  * @swagger
@@ -146,7 +144,7 @@ export const register = (router: Router) => {
    */
   const applicationForMonitoringPutController: ApplicationForMonitoringPutController = container.get('Apps.CoicaSat.controllers.ApplicationForMonitoringPutController');
   // @ts-ignore
-  router.put('/application-for-monitoring/:id', verifyTokenByRoles(), validator.body(ApplicationForMonitoringSchema),  ( req: Request, res: Response ) => applicationForMonitoringPutController.run(req, res));
+  router.put('/application-for-monitoring/:id', verifyTokenByRoles(), validateBody(ApplicationForMonitoringSchema),  ( req: Request, res: Response ) => applicationForMonitoringPutController.run(req, res));
 
   /**
    * @swagger

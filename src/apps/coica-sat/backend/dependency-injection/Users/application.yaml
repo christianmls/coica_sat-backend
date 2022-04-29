@@ -21,3 +21,7 @@ services:
     class: ../../../../../Contexts/CoicaSat/Users/application/UserFinder
     arguments: ['@CoicaSat.Users.domain.UserRepository', '@CoicaSat.Users.domain.UserMapper']
 
+  CoicaSat.Users.application.UserByIdFinder:
+    class: ../../../../../Contexts/CoicaSat/Users/application/UserByIdFinder
+    arguments: [ '@CoicaSat.Users.domain.UserRepository']
+

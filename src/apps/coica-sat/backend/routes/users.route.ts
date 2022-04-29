@@ -2,14 +2,12 @@ import { Router, Request, Response } from 'express';
 import container from '../dependency-injection';
 import {UserPostController} from '../controllers/Users/UserPostController';
 import {UserGetController} from '../controllers/Users/UserGetController';
-import joiValidator from 'express-joi-validation';
 import {UserSchema} from '../schemas/UserSchema';
 import {UserDeleteController} from '../controllers/Users/UserDeleteController';
 import {UserGetOneController} from '../controllers/Users/UserGetOneController';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
 import {Roles} from '../../../../Contexts/CoicaSat/Shared/domain/Roles/Roles';
-
-const validator = joiValidator.createValidator({});
+import {validateBody} from '../schemas/JoiModule';
 
 /**
  * @swagger
@@ -99,7 +97,7 @@ export const register = (router: Router) => {
    */
   const userPostController: UserPostController = container.get('Apps.CoicaSat.controllers.UserPostController');
   // @ts-ignore
-  router.post('/user',  validator.body(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
+  router.post('/user',  validateBody(UserSchema),  (req: Request, res: Response) => userPostController.run(req, res));
 
   /**
    * @swagger
@@ -119,7 +117,7 @@ export const register = (router: Router) => {
    */
   const userGetController: UserGetController = container.get('Apps.CoicaSat.controllers.UserGetController');
   // @ts-ignore
-  router.get('/users',   verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR),  (req: Request, res: Response) => userGetController.run(req, res));
+  router.get('/users',   verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]),  (req: Request, res: Response) => userGetController.run(req, res));
 
   /**
    * @swagger
@@ -170,5 +168,5 @@ export const register = (router: Router) => {
    */
   const userDeleteController: UserDeleteController = container.get('Apps.CoicaSat.controllers.UserDeleteController');
   // @ts-ignore
-  router.delete('/user/:id',   verifyTokenByRoles(Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR), (req: Request, res: Response) => userDeleteController.run(req, res));
+  router.delete('/user/:id',   verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]), (req: Request, res: Response) => userDeleteController.run(req, res));
 };

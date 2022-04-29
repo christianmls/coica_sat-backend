@@ -51,7 +51,7 @@ export class ApplicationForMonitoringCreator {
   }
 
   private async validateIfApplicationForMonitoringExistsByUserId(userId: string) {
-    const applicationsForMonitoring = await this.repository.getAll();
+    const applicationsForMonitoring = await this.repository.getAll({});
     const  applicationForMonitoringByUser = applicationsForMonitoring
       .find((application: ApplicationForMonitoring) => application.userId .value === userId);
     if (applicationForMonitoringByUser) {

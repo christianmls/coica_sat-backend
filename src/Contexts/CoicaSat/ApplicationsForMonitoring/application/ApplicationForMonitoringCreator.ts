@@ -21,7 +21,7 @@ export class ApplicationForMonitoringCreator {
     const updatedAt = new Date();
     let applicationForMonitoringDB: Nullable<ApplicationForMonitoring>;
 
-    if (!isCreateAction)  {
+    if (!isCreateAction && request.status === applicationForMonitoringStatusList.REQUESTED) {
       await this.validateIfApplicationForMonitoringExistsByUserId(request.userId);
       applicationForMonitoringDB = await this.repository.searchById(new ApplicationForMonitoringId(request.id));
       createdAt = applicationForMonitoringDB?.createdAt ?? new Date();

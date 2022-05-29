@@ -1,7 +1,6 @@
 services:
   Apps.CoicaSat.controllers.StatusGetController:
     class: ../../controllers/StatusGetController
-    arguments: []
 
   Apps.CoicaSat.controllers.UserProfilePutController:
     class: ../../controllers/UsersProfile/UserProfilePutController
@@ -65,4 +64,5 @@ services:
 imports:
   - { resource: ./ApplicationForMonitoring/application.yaml }
   - { resource: ./HRDefendersSheetsHistory/application.yaml }
+  - { resource: ./RecoverPassword/application.yaml }
 

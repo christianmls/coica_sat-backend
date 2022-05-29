@@ -1,0 +1,4 @@
+services:
+  Apps.CoicaSat.controllers.RecoverPasswordPostController:
+    class: ../../../controllers/RecoverPassword/RecoverPasswordPostController
+    arguments: [ "@CoicaSat.RecoverPassword.application.RecoverPasswordCreator" ]

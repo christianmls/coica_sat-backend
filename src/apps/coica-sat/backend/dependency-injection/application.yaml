@@ -8,3 +8,4 @@ imports:
   - { resource: ./HRDefendersSheets/application.yaml }
   - { resource: ./ApplicationsForMonitoring/application.yaml }
   - { resource: ./HRDefendersSheetsHistory/application.yaml }
+  - { resource: ./RecoverPassword/application.yaml }

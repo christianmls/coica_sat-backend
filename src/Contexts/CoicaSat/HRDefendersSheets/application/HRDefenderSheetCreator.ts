@@ -72,7 +72,7 @@ export class HRDefenderSheetCreator {
         documentId: hrDefenderSheet.id.value,
         date: new Date(),
         authorId: hrDefenderSheet.requestAuthor,
-        oldDocument: hrDefenderSheet,
+        oldDocument: hrDefenderSheet.toPrimitives(),
         newDocument
       });
       return this.historyRepository.save(hrDefenderSheetHistory);

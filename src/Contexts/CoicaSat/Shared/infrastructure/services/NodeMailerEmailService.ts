@@ -20,7 +20,7 @@ export class NodeMailerEmailService implements EmailService {
         },
         tls: {
           rejectUnauthorized: false,
-          requestCert: true,
+          requestCert: false,
         },
         logger: true
       }

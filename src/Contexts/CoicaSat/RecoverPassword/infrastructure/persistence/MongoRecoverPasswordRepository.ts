@@ -27,6 +27,17 @@ export class MongoRecoverPasswordRepository extends MongoRepository<RecoverPassw
     return this.recoverPasswordDocumentsToPrimitives(recoverPasswordDocuments as RecoverPasswordDocument[]);
   }
 
+  public async searchOne(query: object): Promise<Nullable<RecoverPassword>> {
+    const recoverPassword = await this.findOne<RecoverPasswordDocument>(query);
+
+    return recoverPassword ? RecoverPassword.fromPrimitives({
+      id: recoverPassword._id,
+      email: recoverPassword.email,
+      token: recoverPassword.token,
+      createdAt: recoverPassword.createdAt
+    }) : null;
+  }
+
   public async searchById(id: RecoverPasswordId): Promise<Nullable<RecoverPassword>> {
     const recoverPassword = await this.findOne<RecoverPasswordDocument>({ _id: id.value });
 
@@ -58,4 +69,5 @@ export class MongoRecoverPasswordRepository extends MongoRepository<RecoverPassw
   protected collectionName(): string {
     return 'recover-passwords';
   }
+
 }

@@ -9,3 +9,6 @@ services:
       class: ../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory
       method: 'createClient'
     arguments: [ 'coica-sat', '@Shared.CoicaSat.MongoConfig' ]
+
+  Shared.CoicaSat.domain.EmailService:
+    class: ../../../../../Contexts/CoicaSat/Shared/infrastructure/services/NodeMailerEmailService

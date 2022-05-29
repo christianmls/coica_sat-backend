@@ -1,12 +1,20 @@
 services:
   CoicaSat.RecoverPassword.domain.RecoverPasswordRepository:
     class: ../../../../../Contexts/CoicaSat/RecoverPassword/infrastructure/persistence/MongoRecoverPasswordRepository
-    arguments: ['@Shared.CoicaSat.ConnectionManager']
+    arguments: ["@Shared.CoicaSat.ConnectionManager"]
+
+  CoicaSat.RecoverPassword.application.RecoverPasswordFindeOne:
+    class: ../../../../../Contexts/CoicaSat/RecoverPassword/application/RecoverPasswordFindOne
+    arguments: ['@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository']
 
   CoicaSat.RecoverPassword.application.RecoverPasswordCreator:
     class: ../../../../../Contexts/CoicaSat/RecoverPassword/application/RecoverPasswordCreator
-    arguments: ['@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository']
+    arguments: ['@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository', '@CoicaSat.Users.domain.UserRepository', '@Shared.CoicaSat.domain.EmailService']
+
+  CoicaSat.RecoverPassword.application.ChangePasswordCreator:
+    class: ../../../../../Contexts/CoicaSat/RecoverPassword/application/ChangePasswordCreator
+    arguments: [ '@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository', '@CoicaSat.Users.domain.UserRepository', '@CoicaSat.Users.domain.EncryptionService' ]
 
   CoicaSat.RecoverPassword.application.RecoverPasswordRemover:
     class: ../../../../../Contexts/CoicaSat/RecoverPassword/application/RecoverPasswordRemover
-    arguments: [ '@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository' ]
+    arguments: [ '@CoicaSat.RecoverPassword.domain.RecoverPasswordRepository']

@@ -5,14 +5,14 @@ export class NodeMailerEmailService implements EmailService {
   private readonly transporter: Transporter;
   constructor() {
     const EMAIL_HOST = process.env.EMAIL_HOST || 'smtp.ethereal.email';
-    const EMAIL_PORT = Number(process.env.EMAIL_PORT) || 587;
+    const EMAIL_PORT = 587 || 587;
     const EMAIL_USER = process.env.EMAIL_USER || '';
     const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || '';
 
     this.transporter = nodemailer.createTransport({
         host: EMAIL_HOST,
         port: EMAIL_PORT,
-        secure: true,
+        secure: false,
         auth: {
           user: EMAIL_USER,
           pass: EMAIL_PASSWORD,

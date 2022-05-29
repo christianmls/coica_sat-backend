@@ -13,14 +13,12 @@ export class NodeMailerEmailService implements EmailService {
         host: EMAIL_HOST,
         port: EMAIL_PORT,
         secure: true,
-        requireTLS: false,
         auth: {
           user: EMAIL_USER,
           pass: EMAIL_PASSWORD,
         },
         tls: {
-          rejectUnauthorized: false,
-          requestCert: false,
+          rejectUnauthorized: false
         },
         logger: true
       }

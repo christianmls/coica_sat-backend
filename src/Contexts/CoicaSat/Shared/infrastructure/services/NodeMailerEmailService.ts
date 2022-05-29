@@ -18,6 +18,10 @@ export class NodeMailerEmailService implements EmailService {
           user: EMAIL_USER,
           pass: EMAIL_PASSWORD,
         },
+        tls: {
+          rejectUnauthorized: false,
+          requestCert: true,
+        },
         logger: true
       }
     ) ;

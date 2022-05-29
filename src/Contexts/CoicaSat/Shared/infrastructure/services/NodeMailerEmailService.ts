@@ -9,7 +9,7 @@ export class NodeMailerEmailService implements EmailService {
     const EMAIL_USER = process.env.EMAIL_USER || '';
     const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || '';
 
-    this.transporter = nodemailer.createTransport('SMTP',{
+    this.transporter = nodemailer.createTransport({
         host: EMAIL_HOST,
         port: EMAIL_PORT,
         secure: true,
@@ -18,7 +18,8 @@ export class NodeMailerEmailService implements EmailService {
           pass: EMAIL_PASSWORD,
         },
         tls: {
-          rejectUnauthorized: false
+          rejectUnauthorized: false,
+          ciphers: 'SSLv3'
         },
         logger: true
       }

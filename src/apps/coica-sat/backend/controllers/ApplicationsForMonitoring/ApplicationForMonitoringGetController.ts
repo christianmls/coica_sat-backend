@@ -13,11 +13,13 @@ export class ApplicationForMonitoringGetController implements Controller {
   async run(req: Request, res: Response) {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
+      const { status } = req.query as { status: string };
       const { role, country, id: userCreatorId } =  getUserFromRequest(req);
 
-      const query = role.includes(Roles.ADMIN)  ? {}  : role.includes(Roles.FOCAL_POINT) ? {
-        country
-      } : { userCreatorId };
+      const query = role.includes(Roles.ADMIN)  ? { status }  : role.includes(Roles.FOCAL_POINT) ? {
+        country,
+        status
+      } : { userId: userCreatorId, status };
 
       const paginateItemsResponse = await this.applicationForMonitoringFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(paginateItemsResponse);

@@ -19,8 +19,9 @@ export class User extends AggregateRoot {
   public readonly country: string;
   public readonly photo: string;
   public readonly community: string;
+  public deleted: boolean;
 
-  constructor({id, email, password, role, names, lastNames, phone, birthDate, country, photo, community }: {id: UserId, email: string, password: string, role: Array<string>, names: string, lastNames: string, phone: string, birthDate: Date, country: string, photo: string, community: string}) {
+  constructor({id, email, password, role, names, lastNames, phone, birthDate, country, photo, community, deleted }: {id: UserId, email: string, password: string, role: Array<string>, names: string, lastNames: string, phone: string, birthDate: Date, country: string, photo: string, community: string, deleted: boolean}) {
     super();
 
     this.ensurePasswordLength(password);
@@ -36,6 +37,7 @@ export class User extends AggregateRoot {
     this.country = country;
     this.photo = photo;
     this.community = community;
+    this.deleted = deleted;
   }
 
   private ensurePasswordLength(password: string): void {
@@ -44,7 +46,7 @@ export class User extends AggregateRoot {
     }
   }
 
-  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: Array<string>, country: string, photo: string, community: string}): User {
+  public static fromPrimitives(planData: {id: string, email: string, password: string, names: string, lastNames: string, phone: string, birthDate: Date, role: Array<string>, country: string, photo: string, community: string, deleted: boolean}): User {
     return new User({
       id: new UserId(planData.id),
       email: planData.email,
@@ -56,11 +58,29 @@ export class User extends AggregateRoot {
       birthDate: planData.birthDate,
       country: planData.country,
       photo: planData.photo,
-      community: planData.community
+      community: planData.community,
+      deleted: planData.deleted
     });
   }
 
   toPrimitives(): any {
+    return {
+      id: this.id.value,
+      email: this.email,
+      password: this.password,
+      names: this.names,
+      lastNames: this.lastNames,
+      phone: this.phone,
+      birthDate: this.birthDate,
+      role: this.role,
+      country: this.country,
+      photo: this.photo,
+      community: this.community,
+      deleted: this.deleted
+    };
+  }
+
+  toDocument() {
     return {
       id: this.id.value,
       email: this.email,

@@ -10,6 +10,7 @@ export class HRDefenderSheetHistory extends AggregateRoot {
   public readonly documentId: HRDefenderSheetId;
   public readonly oldDocument: object;
   public readonly newDocument: object;
+  public deleted: boolean;
 
   constructor(
     id: HRDefenderSheetHistoryId,
@@ -18,6 +19,7 @@ export class HRDefenderSheetHistory extends AggregateRoot {
     documentId: HRDefenderSheetId,
     oldDocument: object,
     newDocument: object,
+    deleted: boolean
   ) {
     super();
     this.id = id;
@@ -26,6 +28,7 @@ export class HRDefenderSheetHistory extends AggregateRoot {
     this.documentId = documentId;
     this.oldDocument = oldDocument;
     this.newDocument = newDocument;
+    this.deleted = deleted;
   }
   public static fromPrimitives(plainData: {
       id: string,
@@ -33,7 +36,8 @@ export class HRDefenderSheetHistory extends AggregateRoot {
       authorId: string,
       documentId: string,
       oldDocument: object,
-      newDocument: object
+      newDocument: object,
+      deleted: boolean
     }
   ): HRDefenderSheetHistory {
     return new HRDefenderSheetHistory(
@@ -42,7 +46,8 @@ export class HRDefenderSheetHistory extends AggregateRoot {
       new UserId(plainData.authorId),
       new HRDefenderSheetId(plainData.documentId),
       plainData.oldDocument,
-      plainData.newDocument
+      plainData.newDocument,
+      plainData.deleted
     );
   }
 
@@ -53,7 +58,18 @@ export class HRDefenderSheetHistory extends AggregateRoot {
       authorId: this.authorId.value,
       documentId: this.documentId.value,
       oldDocument: this.oldDocument,
-      newDocument: this.newDocument
+      newDocument: this.newDocument,
+      deleted: this.deleted
     };
+  }
+  public toDocument() {
+    return {
+      id: this.id.value,
+      date: this.date,
+      authorId: this.authorId.value,
+      documentId: this.documentId.value,
+      oldDocument: this.oldDocument,
+      newDocument: this.newDocument
+    }
   }
 }

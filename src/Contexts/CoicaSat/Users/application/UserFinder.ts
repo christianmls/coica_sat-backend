@@ -12,8 +12,8 @@ export class UserFinder {
   }
 
   async run({ pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const totalUsers = await this.repository.count();
-    const users = await this.repository.searchAllPaginated({ pageNumber, nPerPage });
+    const totalUsers = await this.repository.count({ deleted: false });
+    const users = await this.repository.searchAllPaginated({ deleted: false }, { pageNumber, nPerPage });
     const usersPrimitives = this.iUserMapper.transformList(users);
     return new PaginateItemsResponse(usersPrimitives, totalUsers, nPerPage, pageNumber);
   }

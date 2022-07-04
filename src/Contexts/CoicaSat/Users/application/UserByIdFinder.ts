@@ -13,6 +13,6 @@ export class UserByIdFinder {
     if (!user) {
       throw new Error('Usuario no encontrado');
     }
-    return user.toPrimitives();
+    return user.toDocument();
   }
 }

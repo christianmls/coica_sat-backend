@@ -32,7 +32,8 @@ export class ApplicationForMonitoringCreator {
       createdAt,
       details: request.details,
       userId: request.userId,
-      updatedAt
+      updatedAt,
+      deleted: false
     });
 
     if (this.compareStatuses(applicationForMonitoring.status, applicationForMonitoringStatusList.APPROVED) ||

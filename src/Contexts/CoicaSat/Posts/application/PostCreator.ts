@@ -15,6 +15,7 @@ export class PostCreator {
       description: request.description,
       images: request.images,
       userCreatorId: request.userCreatorId,
+      deleted: false
     });
     return this.repository.save(post);
   }

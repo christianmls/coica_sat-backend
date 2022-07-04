@@ -9,6 +9,7 @@ export interface PostDocument {
   description: string;
   images: Array<string>;
   userCreatorId: string;
+  deleted: boolean;
 }
 
 export class MongoPostRepository extends MongoRepository<Post> implements PostRepository {
@@ -19,16 +20,18 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       description: post.description,
       images: post.images,
       userCreatorId: post.userCreatorId,
+      deleted: post.deleted
     })) ?? [];
   }
 
-  async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
-    const posts = await this.findAll<PostDocument>({}, pagination);
+  async searchAllPaginated(query: object, pagination: { pageNumber: number, nPerPage: number }) {
+    const posts = await this.findAll<PostDocument>(query, pagination);
     return posts?.map(post => Post.fromPrimitives({
       id: post._id,
       description: post.description,
       images: post.images,
       userCreatorId: post.userCreatorId,
+      deleted: post.deleted
     })) ?? [];
   }
 
@@ -48,11 +51,12 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       description: document.description,
       images: document.images,
       userCreatorId: document.userCreatorId,
+      deleted: document.deleted
     }) : null;
   }
 
-  public count(): Promise<number> {
-    return this.countDocuments();
+  public count(query: object): Promise<number> {
+    return this.countDocuments(query);
   }
 
   protected collectionName(): string {

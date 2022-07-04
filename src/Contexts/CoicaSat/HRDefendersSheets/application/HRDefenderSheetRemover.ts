@@ -11,6 +11,11 @@ export class HRDefenderSheetRemover {
   }
 
   async run(id: string): Promise<void> {
-    return this.repository.delete(new HRDefenderSheetId(id));
+    const hrDefenderSheet = await this.repository.searchById(new HRDefenderSheetId(id));
+    if (!hrDefenderSheet) {
+      throw new Error(`Documento con id ${ id } no existe`);
+    }
+    hrDefenderSheet.deleted = true;
+    return this.repository.save(hrDefenderSheet);
   }
 }

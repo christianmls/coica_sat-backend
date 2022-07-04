@@ -9,6 +9,7 @@ export class ApplicationForMonitoring extends AggregateRoot {
   public readonly userId: UserId;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
+  public deleted: boolean;
 
   constructor(
     id: ApplicationForMonitoringId,
@@ -16,7 +17,8 @@ export class ApplicationForMonitoring extends AggregateRoot {
     status: string,
     details: string,
     userId: UserId,
-    updatedAt: Date
+    updatedAt: Date,
+    deleted: boolean
   ) {
     super();
     this.id = id;
@@ -25,6 +27,7 @@ export class ApplicationForMonitoring extends AggregateRoot {
     this.details = details;
     this.userId = userId;
     this.updatedAt = updatedAt;
+    this.deleted = deleted;
   }
 
   public static fromPrimitives({
@@ -33,7 +36,8 @@ export class ApplicationForMonitoring extends AggregateRoot {
       status,
       details,
       userId,
-      updatedAt
+      updatedAt,
+      deleted
     }: {
       id: string;
       createdAt: Date;
@@ -41,6 +45,7 @@ export class ApplicationForMonitoring extends AggregateRoot {
       details: string;
       userId: string;
       updatedAt: Date;
+      deleted: boolean;
     }
   ): ApplicationForMonitoring {
     return new ApplicationForMonitoring(
@@ -49,11 +54,24 @@ export class ApplicationForMonitoring extends AggregateRoot {
       status,
       details,
       new UserId(userId),
-      new Date(updatedAt)
+      new Date(updatedAt),
+      deleted
     );
   }
 
   toPrimitives(): any {
+    return {
+      id: this.id.value,
+      createdAt: this.createdAt,
+      status: this.status,
+      details: this.details,
+      userId: this.userId.value,
+      updatedAt: this.updatedAt,
+      deleted: this.deleted
+    };
+  }
+
+  toDocument() {
     return {
       id: this.id.value,
       createdAt: this.createdAt,

@@ -49,6 +49,7 @@ interface HRDefenderSheetDocument {
   yLatitude: string;
   zRise: string;
   description: string;
+  deleted: boolean;
 }
 
 export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSheet> implements HRDefenderSheetRepository {
@@ -114,7 +115,8 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
       xLongitude: hrDefenderSheet.xLongitude,
       yLatitude: hrDefenderSheet.yLatitude,
       zRise: hrDefenderSheet.zRise,
-      description: hrDefenderSheet.description
+      description: hrDefenderSheet.description,
+      deleted: hrDefenderSheet.deleted
     }) : null;
   }
 
@@ -164,7 +166,8 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
         xLongitude: hrDefenderSheet.xLongitude,
         yLatitude: hrDefenderSheet.yLatitude,
         zRise: hrDefenderSheet.zRise,
-        description: hrDefenderSheet.description
+        description: hrDefenderSheet.description,
+        deleted: hrDefenderSheet.deleted
       });
     }) ?? [];
   }

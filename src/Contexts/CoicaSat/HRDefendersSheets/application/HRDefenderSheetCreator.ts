@@ -60,7 +60,8 @@ export class HRDefenderSheetCreator {
       xLongitude: request.xLongitude,
       yLatitude: request.yLatitude,
       zRise: request.zRise,
-      description: request.description
+      description: request.description,
+      deleted: false
     });
     const oldDocument = await this.repository.searchById(hrDefenderSheet.id);
     await this.repository.save(hrDefenderSheet);
@@ -73,7 +74,8 @@ export class HRDefenderSheetCreator {
         date: new Date(),
         authorId: hrDefenderSheet.requestAuthor,
         oldDocument: hrDefenderSheet.toPrimitives(),
-        newDocument
+        newDocument,
+        deleted: false
       });
       return this.historyRepository.save(hrDefenderSheetHistory);
     }

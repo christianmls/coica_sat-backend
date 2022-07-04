@@ -9,6 +9,11 @@ export class ApplicationForMonitoringRemover {
   }
 
   async run(id: string): Promise<void> {
-    return this.repository.delete(new ApplicationForMonitoringId(id));
+    const applicationForMonitoring = await this.repository.searchById(new ApplicationForMonitoringId(id));
+    if (!applicationForMonitoring) {
+      throw new Error(`Documento con id ${ id } no existe`);
+    }
+    applicationForMonitoring.deleted = true;
+    return this.repository.save(applicationForMonitoring);
   }
 }

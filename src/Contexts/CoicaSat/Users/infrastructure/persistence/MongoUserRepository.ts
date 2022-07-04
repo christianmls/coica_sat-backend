@@ -16,6 +16,7 @@ export interface UserDocument {
   country: string;
   photo: string;
   community: string;
+  deleted: boolean;
 }
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
@@ -34,7 +35,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       role: document.role,
       country: document.country,
       photo: document.photo,
-      community: document.community
+      community: document.community,
+      deleted: document.deleted
     }) : null;
   }
 
@@ -51,12 +53,13 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       birthDate: user.birthDate,
       country: user.country,
       photo: user.photo,
-      community: user.community
+      community: user.community,
+      deleted: user.deleted
     })) ?? [];
   }
 
-  async searchAllPaginated(pagination: { pageNumber: number, nPerPage: number }) {
-    const users = await this.findAll<UserDocument>({}, pagination);
+  async searchAllPaginated(query: object, pagination: { pageNumber: number, nPerPage: number }) {
+    const users = await this.findAll<UserDocument>(query, pagination);
     return users?.map(user => User.fromPrimitives({
       id: user._id,
       email: user.email,
@@ -68,7 +71,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       birthDate: user.birthDate,
       country: user.country,
       photo: user.photo,
-      community: user.community
+      community: user.community,
+      deleted: user.deleted
     })) ?? [];
   }
 
@@ -93,12 +97,13 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
       birthDate: document.birthDate,
       country: document.country,
       photo: document.photo,
-      community: document.community
+      community: document.community,
+      deleted: document.deleted
     }) : null;
   }
 
-  public count(): Promise<number> {
-    return this.countDocuments();
+  public count(query: object): Promise<number> {
+    return this.countDocuments(query);
   }
 
   protected collectionName(): string {

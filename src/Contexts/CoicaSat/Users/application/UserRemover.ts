@@ -9,6 +9,11 @@ export class UserRemover {
   }
 
   async run(id: string): Promise<void> {
-    return this.repository.delete(new UserId(id));
+    const user = await this.repository.searchById(new UserId(id));
+    if (!user) {
+      throw new Error(`Documento con id ${ id } no existe`);
+    }
+    user.deleted = true;
+    return this.repository.save(user);
   }
 }

@@ -9,6 +9,11 @@ export class PostRemover {
   }
 
   async run(id: string): Promise<void> {
-    return this.repository.delete(new PostId(id));
+    const post = await this.repository.searchById(new PostId(id));
+    if (!post) {
+      throw new Error(`Documento con id ${ id } no existe`);
+    }
+    post.deleted = true;
+    return this.repository.save(post);
   }
 }

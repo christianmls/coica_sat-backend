@@ -12,8 +12,8 @@ export class PostFinder {
   }
 
   async run({ pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const totalPosts = await this.repository.count();
-    const posts = await this.repository.searchAllPaginated({pageNumber, nPerPage});
+    const totalPosts = await this.repository.count({ deleted: false });
+    const posts = await this.repository.searchAllPaginated({ deleted: false }, {pageNumber, nPerPage});
     const postsPrimitives = this.iPostMapper.transformList(posts);
     return new PaginateItemsResponse(postsPrimitives, totalPosts, nPerPage, pageNumber);
   }

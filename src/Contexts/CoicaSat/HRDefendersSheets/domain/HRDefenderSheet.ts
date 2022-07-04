@@ -46,8 +46,9 @@ export class HRDefenderSheet extends AggregateRoot {
   public readonly yLatitude: string;
   public readonly zRise: string;
   public readonly description: string;
+  public deleted: boolean;
 
-  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: Array<string>, rightsViolatedType: Array<string>, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: Array<string>, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: Array<string>, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: Array<string>, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string, status: string, processing: boolean, mobileLatitude: string, mobileLongitude: string, mobileAddress: string, gpsId: string, xLongitude: string, yLatitude: string, zRise: string, description: string) {
+  constructor(id: HRDefenderSheetId, country: string, threatType: string, location: string, originTown: string, threatOtherType: Array<string>, rightsViolatedType: Array<string>, rightsViolatedOtherType: string, responseType: string, relationShipCOVIDType: Array<string>, relationShipCOVIDOtherType: string, threatAuthor: string, factsReported: string, informationSource: Array<string>, informationSourceOther: string, indicateMeans: string, thereWasLegalAction: string, thereWasAndAnswered: string, defenderName: string, UTMCoordinates: string, contactDetails: string, communityBase: string, completedBy: string, personName: string, requestCountry: string, requestType: Array<string>, requestAuthor: string, requestNumber: string, toWhomWasRequested: string, requestDescription: string, requestShortDescription: string, reportingCommunityBase: string, organizationName: string, organizationPersonName: string, status: string, processing: boolean, mobileLatitude: string, mobileLongitude: string, mobileAddress: string, gpsId: string, xLongitude: string, yLatitude: string, zRise: string, description: string, deleted: boolean) {
     super();
     this.id = id;
     this.country = country;
@@ -93,6 +94,7 @@ export class HRDefenderSheet extends AggregateRoot {
     this.yLatitude = yLatitude;
     this.zRise = zRise;
     this.description = description;
+    this.deleted = deleted;
   }
 
   public static fromPrimitives({
@@ -139,7 +141,8 @@ export class HRDefenderSheet extends AggregateRoot {
     xLongitude,
     yLatitude,
     zRise,
-    description
+    description,
+    deleted
   }: {
     id: string,
     country: string,
@@ -185,6 +188,7 @@ export class HRDefenderSheet extends AggregateRoot {
     yLatitude: string;
     zRise: string;
     description: string;
+    deleted: boolean;
   }): HRDefenderSheet {
     return new HRDefenderSheet(
       new HRDefenderSheetId(id),
@@ -230,10 +234,61 @@ export class HRDefenderSheet extends AggregateRoot {
       xLongitude,
       yLatitude,
       zRise,
-      description
+      description,
+      deleted
     );
   }
   toPrimitives(): any {
+    return {
+      id: this.id.value,
+      country: this.country,
+      threatType: this.threatType,
+      location: this.location,
+      originTown: this.originTown,
+      threatOtherType: this.threatOtherType,
+      rightsViolatedType: this.rightsViolatedType,
+      rightsViolatedOtherType: this.rightsViolatedOtherType,
+      responseType: this.responseType,
+      relationShipCOVIDType: this.relationShipCOVIDType,
+      relationShipCOVIDOtherType: this.relationShipCOVIDOtherType,
+      threatAuthor: this.threatAuthor,
+      factsReported: this.factsReported,
+      informationSource: this.informationSource,
+      informationSourceOther: this.informationSourceOther,
+      indicateMeans: this.indicateMeans,
+      thereWasLegalAction: this.thereWasLegalAction,
+      thereWasAndAnswered: this.thereWasAndAnswered,
+      defenderName: this.defenderName,
+      UTMCoordinates: this.UTMCoordinates,
+      contactDetails: this.contactDetails,
+      communityBase: this.communityBase,
+      completedBy: this.completedBy,
+      personName: this.personName,
+      requestCountry: this.requestCountry,
+      requestType: this.requestType,
+      requestAuthor: this.requestAuthor,
+      requestNumber: this.requestNumber,
+      toWhomWasRequested: this.toWhomWasRequested,
+      requestDescription: this.requestDescription,
+      requestShortDescription: this.requestShortDescription,
+      reportingCommunityBase: this.reportingCommunityBase,
+      organizationName: this.organizationName,
+      organizationPersonName: this.organizationPersonName,
+      status: this.status,
+      processing: this.processing,
+      mobileLatitude: this.mobileLatitude,
+      mobileLongitude: this.mobileLongitude,
+      mobileAddress: this.mobileAddress,
+      gpsId: this.gpsId,
+      xLongitude: this.xLongitude,
+      yLatitude: this.yLatitude,
+      zRise: this.zRise,
+      description: this.description,
+      deleted: this.deleted
+    };
+  }
+
+  toDocument() {
     return {
       id: this.id.value,
       country: this.country,

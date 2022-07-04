@@ -11,6 +11,7 @@ interface ApplicationForMonitoringDocument {
   details: string;
   userId: string;
   updatedAt: Date;
+  deleted: boolean;
 }
 export class MongoApplicationForMonitoringRepository extends MongoRepository<ApplicationForMonitoring> implements ApplicationForMonitoringRepository {
 
@@ -37,7 +38,8 @@ export class MongoApplicationForMonitoringRepository extends MongoRepository<App
       status: document.status,
       details: document.details,
       userId: document.userId,
-      updatedAt: document.updatedAt
+      updatedAt: document.updatedAt,
+      deleted: document.deleted
     }) : null;
   }
 
@@ -49,7 +51,8 @@ export class MongoApplicationForMonitoringRepository extends MongoRepository<App
         status: applicationForMonitoring.status,
         details: applicationForMonitoring.details,
         userId: applicationForMonitoring.userId,
-        updatedAt: applicationForMonitoring.updatedAt
+        updatedAt: applicationForMonitoring.updatedAt,
+        deleted: applicationForMonitoring.deleted
       });
     }) ?? [];
   }

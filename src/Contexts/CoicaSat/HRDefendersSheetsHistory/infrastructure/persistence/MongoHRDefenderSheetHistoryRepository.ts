@@ -10,6 +10,7 @@ interface HRDefenderSheetHistoryDocument {
   documentId: string;
   oldDocument: object;
   newDocument: object;
+  deleted: boolean;
 }
 
 export class MongoHRDefenderSheetHistoryRepository extends MongoRepository<HRDefenderSheetHistory> implements HRDefenderSheetHistoryRepository {
@@ -36,7 +37,8 @@ export class MongoHRDefenderSheetHistoryRepository extends MongoRepository<HRDef
         authorId: hrDefenderSheetHistory.authorId,
         documentId: hrDefenderSheetHistory.documentId,
         oldDocument: hrDefenderSheetHistory.oldDocument,
-        newDocument: hrDefenderSheetHistory.newDocument
+        newDocument: hrDefenderSheetHistory.newDocument,
+        deleted: hrDefenderSheetHistory.deleted
       });
     }) ?? [];
   }

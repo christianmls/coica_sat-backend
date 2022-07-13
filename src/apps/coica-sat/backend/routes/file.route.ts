@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import {FilePostController} from '../controllers/Files/FilePostController';
+import {verifyTokenByRoles} from '../services/AuthorizeService';
 
 /**
  * @swagger
@@ -52,5 +53,6 @@ export const register = (router: Router) => {
    */
 
   const filePostController: FilePostController = new FilePostController();
-  router.post('/upload-file',   (req: Request, res: Response) => filePostController.run(req, res));
+  // @ts-ignore
+  router.post('/upload-file',  verifyTokenByRoles(),   (req: Request, res: Response) => filePostController.run(req, res));
 };

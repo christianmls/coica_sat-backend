@@ -10,6 +10,7 @@ export interface PostDocument {
   images: Array<string>;
   userCreatorId: string;
   deleted: boolean;
+  status: string;
 }
 
 export class MongoPostRepository extends MongoRepository<Post> implements PostRepository {
@@ -20,7 +21,8 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       description: post.description,
       images: post.images,
       userCreatorId: post.userCreatorId,
-      deleted: post.deleted
+      deleted: post.deleted,
+      status: post.status
     })) ?? [];
   }
 
@@ -31,7 +33,8 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       description: post.description,
       images: post.images,
       userCreatorId: post.userCreatorId,
-      deleted: post.deleted
+      deleted: post.deleted,
+      status: post.status
     })) ?? [];
   }
 
@@ -51,7 +54,8 @@ export class MongoPostRepository extends MongoRepository<Post> implements PostRe
       description: document.description,
       images: document.images,
       userCreatorId: document.userCreatorId,
-      deleted: document.deleted
+      deleted: document.deleted,
+      status: document.status
     }) : null;
   }
 

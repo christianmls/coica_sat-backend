@@ -17,7 +17,8 @@ export class PostPostController implements Controller {
   async run(req: PostPostRequest, res: Response) {
       try {
         const { id, description, images } = req.body;
-        await this.postCreator.run({ id, description, images, userCreatorId: req.user.id });
+        const status = 'EN REVISIÓN';
+        await this.postCreator.run({ id, description, images, userCreatorId: req.user.id, status });
         res.status(httpStatus.CREATED).send();
       }  catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

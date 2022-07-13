@@ -3,4 +3,5 @@ export type CreatePostRequest = {
   description: string;
   images: Array<string>;
   userCreatorId: string;
+  status: string;
 };

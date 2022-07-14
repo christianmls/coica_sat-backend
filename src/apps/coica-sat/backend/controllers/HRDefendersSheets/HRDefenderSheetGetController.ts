@@ -14,13 +14,11 @@ export class HRDefenderSheetGetController implements Controller {
     try {
       const { pageNumber, nPerPage } = getPaginationFromQuery(req);
       const { role, country, id: userCreatorId } =  getUserFromRequest(req);
-
-      let query = role.includes(Roles.ADMIN)  ? {}  : role.includes(Roles.FOCAL_POINT) ? {
-        country
-      } : { userCreatorId };
-      const { status } = req.query;
-      // @ts-ignore
-      query = status ? { ...query, status } : query;
+      const { status } = req.query as { status: string };
+      const query = role.includes(Roles.ADMIN)  ? { status }  : role.includes(Roles.FOCAL_POINT) ? {
+        country,
+        status
+      } : { userCreatorId, status  };
       const hrDefendersSheets = await this.postFinder.run(query,{ pageNumber, nPerPage });
       res.status(httpStatus.OK).send(hrDefendersSheets);
     }  catch (error) {

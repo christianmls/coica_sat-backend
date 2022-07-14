@@ -1,5 +1,65 @@
 import Joi from 'joi';
 
+
+/*
+  country: string;
+  threatType: string;
+  genderThreatType: string;
+  community: string;
+  originTown: string;
+  latLocation: string;
+  longLocation: string;
+  addressLocation: string;
+  threatAttackType: Array<string>;
+  threatAttackOtherType: string;
+  rightsViolatedType: Array<string>;
+  rightsViolatedOtherType: string;
+  relationShipCOVIDyesNo: string;
+  relationShipCOVIDType: Array<string>;
+  relationShipCOVIDOtherType: string;
+  allegedAuthor: Array<string>;
+  allegedAuthorOther: string;
+  factsReported: string;
+  factsReportedAudio: Array<string>;
+  informationSource: Array<string>;
+  informationSourceOther: string;
+  indicateMeansVerification: string;
+  thereWasLegalAction: string;
+  thereWasAndAnsweredState: string;
+  defenderName: string;
+  latUTMCoordinates: string;
+  logUTMCoordinates: string;
+  elvUTMCoordinates: string;
+  descriptionUTMCoordinates: string;
+  contactEmail: string;
+  contactPhone: string;
+  communityBase: string;
+  organizationBase: string;
+  completedBy: string;
+  userById: string;
+  dateFill: string;
+  countryFormRequest: string;
+  requestTypeFormRequest: Array<string>;
+  requestOtherTypeFormRequest: string;
+  requestAuthorFormRequest: string;
+  requestNumberFormRequest: string;
+  requestDateFormRequest: string;
+  toWhomWasRequestedFormRequest: string;
+  requestDescriptionFormRequest: string;
+  resumeDescriptionFormRequest: string;
+  communityBaseFormRequest: string;
+  organizationBaseFormRequest: string;
+  completedByFormRequest: string;
+  dateFillFormRequest: string;
+  status: string;
+  processing: string;
+  uploaded: string;
+  description: string;
+  deleteField: string;
+  autoDate: string;
+  autoDateUpdate: string;
+ */
+
 export const HrDefenderSheetSchema = Joi.object().keys({
   id: Joi.string().required(),
   country: Joi.string().required(),

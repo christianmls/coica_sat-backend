@@ -7,49 +7,62 @@ import {Nullable} from '../../../../Shared/domain/Nullable';
 interface HRDefenderSheetDocument {
     _id: string;
     country: string;
-  threatType: string;
-  location: string;
-  originTown: string;
-  threatOtherType: Array<string>;
-  rightsViolatedType: Array<string>;
-  rightsViolatedOtherType: string;
-  responseType: string;
-  relationShipCOVIDType: Array<string>;
-  relationShipCOVIDOtherType: string;
-  threatAuthor: string;
-  factsReported: string;
-  informationSource: Array<string>;
-  informationSourceOther: string;
-  indicateMeans: string;
-  thereWasLegalAction: string;
-  thereWasAndAnswered: string;
-  defenderName: string;
-  UTMCoordinates: string;
-  contactDetails: string;
-  communityBase: string;
-  completedBy: string;
-  personName: string;
-  requestCountry: string;
-  requestType: Array<string>;
-  requestAuthor: string;
-  requestNumber: string;
-  toWhomWasRequested: string;
-  requestDescription: string;
-  requestShortDescription: string;
-  reportingCommunityBase: string;
-  organizationName: string;
-  organizationPersonName: string;
-  status: string;
-  processing: boolean;
-  mobileLatitude: string;
-  mobileLongitude: string;
-  mobileAddress: string;
-  gpsId: string;
-  xLongitude: string;
-  yLatitude: string;
-  zRise: string;
-  description: string;
-  deleted: boolean;
+    threatType: string;
+    genderThreatType: string;
+    community: string;
+    originTown: string;
+    latLocation: string;
+    longLocation: string;
+    addressLocation: string;
+    threatAttackType: Array<string>;
+    threatAttackOtherType: string;
+    rightsViolatedType: Array<string>;
+    rightsViolatedOtherType: string;
+    relationShipCOVIDyesNo: string;
+    relationShipCOVIDType: Array<string>;
+    relationShipCOVIDOtherType: string;
+    allegedAuthor: Array<string>;
+    allegedAuthorOther: string;
+    factsReported: string;
+    factsReportedAudio: Array<string>;
+    informationSource: Array<string>;
+    informationSourceOther: string;
+    indicateMeansVerification: string;
+    thereWasLegalAction: string;
+    thereWasAndAnsweredState: string;
+    defenderName: string;
+    latUTMCoordinates: string;
+    logUTMCoordinates: string;
+    elvUTMCoordinates: string;
+    descriptionUTMCoordinates: string;
+    contactEmail: string;
+    contactPhone: string;
+    communityBase: string;
+    organizationBase: string;
+    completedBy: string;
+    userById: string;
+    dateFill: string;
+    countryFormRequest: string;
+    requestTypeFormRequest: Array<string>;
+    requestOtherTypeFormRequest: string;
+    requestAuthorFormRequest: string;
+    requestNumberFormRequest: string;
+    requestDateFormRequest: string;
+    toWhomWasRequestedFormRequest: string;
+    requestDescriptionFormRequest: string;
+    resumeDescriptionFormRequest: string;
+    communityBaseFormRequest: string;
+    organizationBaseFormRequest: string;
+    completedByFormRequest: string;
+    dateFillFormRequest: string;
+    status: string;
+    processing: string;
+    uploaded: string;
+    description: string;
+    deleteField: string;
+    autoDate: string;
+    autoDateUpdate: string;
+    deleted: boolean;
 }
 
 export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSheet> implements HRDefenderSheetRepository {
@@ -75,47 +88,60 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
       id: id.value,
       country: hrDefenderSheet.country,
       threatType: hrDefenderSheet.threatType,
-      location: hrDefenderSheet.location,
+      genderThreatType: hrDefenderSheet.genderThreatType,
+      community: hrDefenderSheet.community,
       originTown: hrDefenderSheet.originTown,
-      threatOtherType: hrDefenderSheet.threatOtherType,
+      latLocation: hrDefenderSheet.latLocation,
+      longLocation: hrDefenderSheet.longLocation,
+      addressLocation: hrDefenderSheet.addressLocation,
+      threatAttackType: hrDefenderSheet.threatAttackType,
+      threatAttackOtherType: hrDefenderSheet.threatAttackOtherType,
       rightsViolatedType: hrDefenderSheet.rightsViolatedType,
       rightsViolatedOtherType: hrDefenderSheet.rightsViolatedOtherType,
-      responseType: hrDefenderSheet.responseType,
+      relationShipCOVIDyesNo: hrDefenderSheet.relationShipCOVIDyesNo,
       relationShipCOVIDType: hrDefenderSheet.relationShipCOVIDType,
       relationShipCOVIDOtherType: hrDefenderSheet.relationShipCOVIDOtherType,
-      threatAuthor: hrDefenderSheet.threatAuthor,
+      allegedAuthor: hrDefenderSheet.allegedAuthor,
+      allegedAuthorOther: hrDefenderSheet.allegedAuthorOther,
       factsReported: hrDefenderSheet.factsReported,
+      factsReportedAudio: hrDefenderSheet.factsReportedAudio,
       informationSource: hrDefenderSheet.informationSource,
       informationSourceOther: hrDefenderSheet.informationSourceOther,
-      indicateMeans: hrDefenderSheet.indicateMeans,
+      indicateMeansVerification: hrDefenderSheet.indicateMeansVerification,
       thereWasLegalAction: hrDefenderSheet.thereWasLegalAction,
-      thereWasAndAnswered: hrDefenderSheet.thereWasAndAnswered,
+      thereWasAndAnsweredState: hrDefenderSheet.thereWasAndAnsweredState,
       defenderName: hrDefenderSheet.defenderName,
-      UTMCoordinates: hrDefenderSheet.UTMCoordinates,
-      contactDetails: hrDefenderSheet.contactDetails,
+      latUTMCoordinates: hrDefenderSheet.latUTMCoordinates,
+      logUTMCoordinates: hrDefenderSheet.logUTMCoordinates,
+      elvUTMCoordinates: hrDefenderSheet.elvUTMCoordinates,
+      descriptionUTMCoordinates: hrDefenderSheet.descriptionUTMCoordinates,
+      contactEmail: hrDefenderSheet.contactEmail,
+      contactPhone: hrDefenderSheet.contactPhone,
       communityBase: hrDefenderSheet.communityBase,
+      organizationBase: hrDefenderSheet.organizationBase,
       completedBy: hrDefenderSheet.completedBy,
-      personName: hrDefenderSheet.personName,
-      requestCountry: hrDefenderSheet.requestCountry,
-      requestType: hrDefenderSheet.requestType,
-      requestAuthor: hrDefenderSheet.requestAuthor,
-      requestNumber: hrDefenderSheet.requestNumber,
-      toWhomWasRequested: hrDefenderSheet.toWhomWasRequested,
-      requestDescription: hrDefenderSheet.requestDescription,
-      requestShortDescription: hrDefenderSheet.requestShortDescription,
-      reportingCommunityBase: hrDefenderSheet.reportingCommunityBase,
-      organizationName: hrDefenderSheet.organizationName,
-      organizationPersonName: hrDefenderSheet.organizationPersonName,
+      userById: hrDefenderSheet.userById,
+      dateFill: hrDefenderSheet.dateFill,
+      countryFormRequest: hrDefenderSheet.countryFormRequest,
+      requestTypeFormRequest: hrDefenderSheet.requestTypeFormRequest,
+      requestOtherTypeFormRequest: hrDefenderSheet.requestOtherTypeFormRequest,
+      requestAuthorFormRequest: hrDefenderSheet.requestAuthorFormRequest,
+      requestNumberFormRequest: hrDefenderSheet.requestNumberFormRequest,
+      requestDateFormRequest: hrDefenderSheet.requestDateFormRequest,
+      toWhomWasRequestedFormRequest: hrDefenderSheet.toWhomWasRequestedFormRequest,
+      requestDescriptionFormRequest: hrDefenderSheet.requestDescriptionFormRequest,
+      resumeDescriptionFormRequest: hrDefenderSheet.resumeDescriptionFormRequest,
+      communityBaseFormRequest: hrDefenderSheet.communityBaseFormRequest,
+      organizationBaseFormRequest: hrDefenderSheet.organizationBaseFormRequest,
+      completedByFormRequest: hrDefenderSheet.completedByFormRequest,
+      dateFillFormRequest: hrDefenderSheet.dateFillFormRequest,
       status: hrDefenderSheet.status,
       processing: hrDefenderSheet.processing,
-      mobileLatitude: hrDefenderSheet.mobileLatitude,
-      mobileLongitude: hrDefenderSheet.mobileLongitude,
-      mobileAddress: hrDefenderSheet.mobileAddress,
-      gpsId: hrDefenderSheet.gpsId,
-      xLongitude: hrDefenderSheet.xLongitude,
-      yLatitude: hrDefenderSheet.yLatitude,
-      zRise: hrDefenderSheet.zRise,
+      uploaded: hrDefenderSheet.uploaded,
       description: hrDefenderSheet.description,
+      deleteField: hrDefenderSheet.deleteField,
+      autoDate: hrDefenderSheet.autoDate,
+      autoDateUpdate: hrDefenderSheet.autoDateUpdate,
       deleted: hrDefenderSheet.deleted
     }) : null;
   }
@@ -126,47 +152,60 @@ export class MongoHRDefenderSheetRepository extends MongoRepository<HRDefenderSh
         id: hrDefenderSheet._id,
         country: hrDefenderSheet.country,
         threatType: hrDefenderSheet.threatType,
-        location: hrDefenderSheet.location,
+        genderThreatType: hrDefenderSheet.genderThreatType,
+        community: hrDefenderSheet.community,
         originTown: hrDefenderSheet.originTown,
-        threatOtherType: hrDefenderSheet.threatOtherType,
+        latLocation: hrDefenderSheet.latLocation,
+        longLocation: hrDefenderSheet.longLocation,
+        addressLocation: hrDefenderSheet.addressLocation,
+        threatAttackType: hrDefenderSheet.threatAttackType,
+        threatAttackOtherType: hrDefenderSheet.threatAttackOtherType,
         rightsViolatedType: hrDefenderSheet.rightsViolatedType,
         rightsViolatedOtherType: hrDefenderSheet.rightsViolatedOtherType,
-        responseType: hrDefenderSheet.responseType,
+        relationShipCOVIDyesNo: hrDefenderSheet.relationShipCOVIDyesNo,
         relationShipCOVIDType: hrDefenderSheet.relationShipCOVIDType,
         relationShipCOVIDOtherType: hrDefenderSheet.relationShipCOVIDOtherType,
-        threatAuthor: hrDefenderSheet.threatAuthor,
+        allegedAuthor: hrDefenderSheet.allegedAuthor,
+        allegedAuthorOther: hrDefenderSheet.allegedAuthorOther,
         factsReported: hrDefenderSheet.factsReported,
+        factsReportedAudio: hrDefenderSheet.factsReportedAudio,
         informationSource: hrDefenderSheet.informationSource,
         informationSourceOther: hrDefenderSheet.informationSourceOther,
-        indicateMeans: hrDefenderSheet.indicateMeans,
+        indicateMeansVerification: hrDefenderSheet.indicateMeansVerification,
         thereWasLegalAction: hrDefenderSheet.thereWasLegalAction,
-        thereWasAndAnswered: hrDefenderSheet.thereWasAndAnswered,
+        thereWasAndAnsweredState: hrDefenderSheet.thereWasAndAnsweredState,
         defenderName: hrDefenderSheet.defenderName,
-        UTMCoordinates: hrDefenderSheet.UTMCoordinates,
-        contactDetails: hrDefenderSheet.contactDetails,
+        latUTMCoordinates: hrDefenderSheet.latUTMCoordinates,
+        logUTMCoordinates: hrDefenderSheet.logUTMCoordinates,
+        elvUTMCoordinates: hrDefenderSheet.elvUTMCoordinates,
+        descriptionUTMCoordinates: hrDefenderSheet.descriptionUTMCoordinates,
+        contactEmail: hrDefenderSheet.contactEmail,
+        contactPhone: hrDefenderSheet.contactPhone,
         communityBase: hrDefenderSheet.communityBase,
+        organizationBase: hrDefenderSheet.organizationBase,
         completedBy: hrDefenderSheet.completedBy,
-        personName: hrDefenderSheet.personName,
-        requestCountry: hrDefenderSheet.requestCountry,
-        requestType: hrDefenderSheet.requestType,
-        requestAuthor: hrDefenderSheet.requestAuthor,
-        requestNumber: hrDefenderSheet.requestNumber,
-        toWhomWasRequested: hrDefenderSheet.toWhomWasRequested,
-        requestDescription: hrDefenderSheet.requestDescription,
-        requestShortDescription: hrDefenderSheet.requestShortDescription,
-        reportingCommunityBase: hrDefenderSheet.reportingCommunityBase,
-        organizationName: hrDefenderSheet.organizationName,
-        organizationPersonName: hrDefenderSheet.organizationPersonName,
+        userById: hrDefenderSheet.userById,
+        dateFill: hrDefenderSheet.dateFill,
+        countryFormRequest: hrDefenderSheet.countryFormRequest,
+        requestTypeFormRequest: hrDefenderSheet.requestTypeFormRequest,
+        requestOtherTypeFormRequest: hrDefenderSheet.requestOtherTypeFormRequest,
+        requestAuthorFormRequest: hrDefenderSheet.requestAuthorFormRequest,
+        requestNumberFormRequest: hrDefenderSheet.requestNumberFormRequest,
+        requestDateFormRequest: hrDefenderSheet.requestDateFormRequest,
+        toWhomWasRequestedFormRequest: hrDefenderSheet.toWhomWasRequestedFormRequest,
+        requestDescriptionFormRequest: hrDefenderSheet.requestDescriptionFormRequest,
+        resumeDescriptionFormRequest: hrDefenderSheet.resumeDescriptionFormRequest,
+        communityBaseFormRequest: hrDefenderSheet.communityBaseFormRequest,
+        organizationBaseFormRequest: hrDefenderSheet.organizationBaseFormRequest,
+        completedByFormRequest: hrDefenderSheet.completedByFormRequest,
+        dateFillFormRequest: hrDefenderSheet.dateFillFormRequest,
         status: hrDefenderSheet.status,
         processing: hrDefenderSheet.processing,
-        mobileLatitude: hrDefenderSheet.mobileLatitude,
-        mobileLongitude: hrDefenderSheet.mobileLongitude,
-        mobileAddress: hrDefenderSheet.mobileAddress,
-        gpsId: hrDefenderSheet.gpsId,
-        xLongitude: hrDefenderSheet.xLongitude,
-        yLatitude: hrDefenderSheet.yLatitude,
-        zRise: hrDefenderSheet.zRise,
+        uploaded: hrDefenderSheet.uploaded,
         description: hrDefenderSheet.description,
+        deleteField: hrDefenderSheet.deleteField,
+        autoDate: hrDefenderSheet.autoDate,
+        autoDateUpdate: hrDefenderSheet.autoDateUpdate,
         deleted: hrDefenderSheet.deleted
       });
     }) ?? [];

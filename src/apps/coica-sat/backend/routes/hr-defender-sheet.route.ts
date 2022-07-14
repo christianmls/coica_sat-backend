@@ -4,10 +4,10 @@ import {HRDefenderSheetGetController} from '../controllers/HRDefendersSheets/HRD
 import {HRDefenderSheetPutController} from '../controllers/HRDefendersSheets/HRDefenderSheetPutController';
 import {HRDefenderSheetDeleteController} from '../controllers/HRDefendersSheets/HRDefenderSheetDeleteController';
 import {HRDefenderSheetPostController} from '../controllers/HRDefendersSheets/HRDefenderSheetPostController';
-import {HrDefenderSheetSchema} from '../schemas/hrDefenderSheetSchema';
+//import {HrDefenderSheetSchema} from '../schemas/hrDefenderSheetSchema';
 import {verifyTokenByRoles} from '../services/AuthorizeService';
 import {Roles} from '../../../../Contexts/CoicaSat/Shared/domain/Roles/Roles';
-import {validateBody} from '../schemas/JoiModule';
+//import {validateBody} from '../schemas/JoiModule';
 
 /**
  * @swagger
@@ -207,7 +207,7 @@ export const register = (router: Router) => {
    */
   const appointmentPostController: HRDefenderSheetPostController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetPostController');
   // @ts-ignore
-  router.post('/hr-defender-sheet', verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]), validateBody(HrDefenderSheetSchema),  ( req: Request, res: Response ) => appointmentPostController.run(req, res));
+  router.post('/hr-defender-sheet', verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]),  ( req: Request, res: Response ) => appointmentPostController.run(req, res));
 
 
   /**
@@ -243,7 +243,7 @@ export const register = (router: Router) => {
    */
   const hrDefenderSheetPutController: HRDefenderSheetPutController = container.get('Apps.CoicaSat.controllers.HRDefenderSheetPutController');
   // @ts-ignore
-  router.put('/hr-defender-sheet/:id', verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]),  validateBody(HrDefenderSheetSchema),   (req: Request, res: Response) => hrDefenderSheetPutController.run(req, res));
+  router.put('/hr-defender-sheet/:id', verifyTokenByRoles([Roles.ADMIN, Roles.FOCAL_POINT, Roles.MONITOR]),   (req: Request, res: Response) => hrDefenderSheetPutController.run(req, res));
 
   /**
    * @swagger

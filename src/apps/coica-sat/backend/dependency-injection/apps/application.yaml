@@ -29,6 +29,7 @@ services:
 
   Apps.CoicaSat.controllers.TokenVerificationGetController:
     class: ../../controllers/TokensVerification/TokenVerificationGetController
+    arguments: [ "@CoicaSat.Users.application.UserByIdFinder" ]
 
   Apps.CoicaSat.controllers.PostPostController:
     class: ../../controllers/Posts/PostPostController

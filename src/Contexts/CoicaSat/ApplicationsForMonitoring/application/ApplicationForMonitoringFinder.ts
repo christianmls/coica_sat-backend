@@ -12,7 +12,7 @@ export class ApplicationForMonitoringFinder {
   }
 
   async run(query: any, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const queryDB = query['userCreatorId'] ? { ...query, userCreatorId: query['userCreatorId'] } : { query };
+    const queryDB = query['userCreatorId'] ? { ...query, userCreatorId: query['userCreatorId'] } : { ...query };
     const applicationsForMonitoring = await this.repository.getAll({ ...queryDB, deleted: false });
     const applicationsForMonitoringPrimitives = await this.addUserToApplicationsForMonitoring(applicationsForMonitoring);
     const applicationsForMonitoringPrimitivesByUserCountry = query['country'] ?

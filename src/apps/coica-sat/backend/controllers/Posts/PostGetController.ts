@@ -8,10 +8,10 @@ import {getPaginationFromQuery} from '../../services/Utility';
 export class PostGetController implements Controller {
   constructor(private postFinder: PostFinder) {}
 
-  async run(req: Request, res: Response) {
-      try {
+  async run(req: Request, res: Response) {      try {
         const { pageNumber, nPerPage } = getPaginationFromQuery(req);
-        const posts = await this.postFinder.run({ pageNumber, nPerPage });
+        const { status } = req.query as { status: string };
+        const posts = await this.postFinder.run({status}, { pageNumber, nPerPage });
         res.status(httpStatus.OK).send(posts);
       }  catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send({

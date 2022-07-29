@@ -15,5 +15,5 @@ services:
     arguments: [ '@CoicaSat.Posts.domain.PostRepository' ]
 
   CoicaSat.Posts.application.PostFinder:
-    class: ../../../../../Contexts/CoicaSat/Users/application/UserFinder
+    class: ../../../../../Contexts/CoicaSat/Posts/application/PostFinder
     arguments: [ '@CoicaSat.Posts.domain.PostRepository', '@CoicaSat.Posts.domain.PostMapper' ]

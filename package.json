@@ -11,7 +11,7 @@
     "npm": "<=6.14.0"
   },
   "scripts": {
-    "dev:coica_sat:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  src/apps/coica-sat/backend/start.ts",
+    "dev:coica_sat:backend": "ts-node-dev --ignore-watch node_modules  src/apps/coica-sat/backend/start.ts",
     "lint": "tslint src/**/*.ts{,x}",
     "test": "npm run test:unit && npm run test:features",
     "test:unit": "NODE_ENV=test jest",

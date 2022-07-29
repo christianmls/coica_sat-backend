@@ -10,6 +10,6 @@ export class PostMapper implements  IPostMapper {
   }
 
   public transformToDTO(post: Post): PostDTO {
-    return new PostDTO(post.id.value, post.description, post.images, post.userCreatorId.value);
+    return new PostDTO(post.id.value, post.description, post.images, post.userCreatorId.value, post.status);
   }
 }

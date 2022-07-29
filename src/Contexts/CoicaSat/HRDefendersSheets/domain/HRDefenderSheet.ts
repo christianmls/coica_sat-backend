@@ -190,7 +190,7 @@ export class HRDefenderSheet extends AggregateRoot {
 
   toPrimitives(): any {
     return {
-      id: this.id,
+      id: this.id.value,
       country: this.country,
       threatType: this.threatType,
       genderThreatType: this.genderThreatType,
@@ -225,7 +225,7 @@ export class HRDefenderSheet extends AggregateRoot {
       communityBase: this.communityBase,
       organizationBase: this.organizationBase,
       completedBy: this.completedBy,
-      userById: this.userById,
+      userById: this.userById.value,
       dateFill: this.dateFill,
       countryFormRequest: this.countryFormRequest,
       requestTypeFormRequest: this.requestTypeFormRequest,
@@ -253,7 +253,7 @@ export class HRDefenderSheet extends AggregateRoot {
 
   toDocument(): any {
     return {
-      id: this.id,
+      id: this.id.value,
       country: this.country,
       threatType: this.threatType,
       genderThreatType: this.genderThreatType,
@@ -288,7 +288,7 @@ export class HRDefenderSheet extends AggregateRoot {
       communityBase: this.communityBase,
       organizationBase: this.organizationBase,
       completedBy: this.completedBy,
-      userById: this.userById,
+      userById: this.userById.value,
       dateFill: this.dateFill,
       countryFormRequest: this.countryFormRequest,
       requestTypeFormRequest: this.requestTypeFormRequest,

@@ -11,9 +11,9 @@ export class PostFinder {
     this.iPostMapper =  roleMapper;
   }
 
-  async run({ pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
-    const totalPosts = await this.repository.count({ deleted: false });
-    const posts = await this.repository.searchAllPaginated({ deleted: false }, {pageNumber, nPerPage});
+  async run(query: object, { pageNumber, nPerPage }: { pageNumber: number, nPerPage: number }) {
+    const totalPosts = await this.repository.count({...query, deleted: false });
+    const posts = await this.repository.searchAllPaginated({...query, deleted: false }, {pageNumber, nPerPage});
     const postsPrimitives = this.iPostMapper.transformList(posts);
     return new PaginateItemsResponse(postsPrimitives, totalPosts, nPerPage, pageNumber);
   }
